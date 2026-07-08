@@ -1,0 +1,184 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id          Int      @id @default(autoincrement())
+
+  name        String
+  tagline     String
+  description String   @db.Text
+  logo        String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Hero {
+  id          Int      @id @default(autoincrement())
+
+  title       String
+  subtitle    String?
+  description String   @db.Text
+
+  buttonText  String
+  buttonLink  String
+
+  image       String
+
+  updatedAt   DateTime @updatedAt
+}
+
+model CollectionCategory {
+  id          Int      @id @default(autoincrement())
+
+  name        String   @unique
+  slug        String   @unique
+
+  collections Collection[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Collection {
+  id          Int      @id @default(autoincrement())
+
+  categoryId  Int
+
+  title       String
+  slug        String   @unique
+
+  description String   @db.Text
+
+  coverImage  String
+
+  category    CollectionCategory@relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  detail      CollectionDetail?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CollectionDetail {
+  id            Int      @id @default(autoincrement())
+
+  collectionId  Int      @unique
+
+  description   String   @db.Text
+
+  videoUrl      String?
+
+  collection    Collection@relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  gallery       CollectionGallery[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model CollectionGallery {
+  id          Int      @id @default(autoincrement())
+
+  detailId    Int
+
+  title       String
+
+  image       String
+
+  detail      CollectionDetail@relation(fields: [detailId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Technology {
+  id          Int      @id @default(autoincrement())
+
+  title       String
+
+  description String   @db.Text
+
+  image       String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model DreamBetter {
+  id          Int      @id @default(autoincrement())
+
+  title       String
+
+  slug        String   @unique
+
+  description String   @db.Text
+
+  image       String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id          Int      @id @default(autoincrement())
+
+  image       String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Dealer {
+  id          Int      @id @default(autoincrement())
+
+  name        String
+
+  island      String
+  province    String
+  city        String
+
+  address     String   @db.Text
+
+  phone       String?
+
+  mapsUrl     String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactMessage {
+  id          Int      @id @default(autoincrement())
+
+  name        String
+
+  email       String
+
+  phone       String?
+
+  message     String   @db.Text
+
+  createdAt   DateTime @default(now())
+}
+
+model Admin {
+  id          Int      @id @default(autoincrement())
+
+  username    String   @unique
+
+  password    String
+
+  createdAt   DateTime @default(now())
+}
