@@ -37,6 +37,18 @@ export class CollectionService {
       },
     });
   }
+  findBySlug(slug: string) {
+    return this.prisma.collection.findUnique({
+      where: {
+        slug,
+      },
+      include: {
+        category: true,
+        detail: true,
+        products: true,
+      },
+    });
+  }
   findRetail() {
     return this.prisma.collection.findMany({
       where: {

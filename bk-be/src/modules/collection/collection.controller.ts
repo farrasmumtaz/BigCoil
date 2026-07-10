@@ -40,6 +40,11 @@ export class CollectionController {
     return this.collectionService.findHospitality();
   }
 
+  @Get('slug/:slug')
+  findBySlug(@Param('slug') slug: string) {
+    return this.collectionService.findBySlug(slug);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.collectionService.findOne(id);

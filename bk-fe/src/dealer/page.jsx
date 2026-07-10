@@ -1,12 +1,13 @@
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-import CollectionDetail from "../components/sections/CollectionDetail";
 
-export default function CollectionDetailPage() {
+import Dealer from "../components/sections/Dealer";
+
+export default function DealerPage() {
   return (
     <>
       <Navbar />
-      <CollectionDetail />
+      <Dealer />
       <Footer />
     </>
   );

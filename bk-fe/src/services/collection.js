@@ -11,8 +11,9 @@ export const collectionApi = {
     return res.data;
   },
 
-  getBySlug: async (slug) => {
-    const res = await api.get(`/collection/slug/${slug}`);
-    return res.data;
-  },
+  getBySlug(slug) {
+    return api
+      .get(`/collection/slug/${slug}`)
+      .then((res) => res.data);
+  }
 };

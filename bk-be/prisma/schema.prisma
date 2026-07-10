@@ -78,6 +78,25 @@ model Collection {
 
   products Product[]
 
+  detail CollectionDetail?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CollectionDetail {
+  id Int @id @default(autoincrement())
+
+  collectionId Int @unique
+
+  heroImage String
+
+  heroTitle String
+
+  heroDescription String @db.Text
+
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -101,7 +120,7 @@ model Product {
   galleries ProductGallery[]
 
   descriptions ProductDescription[]
-  
+
   productSpecifications ProductSpecification[]
 
   productTechnologies ProductTechnology[]
@@ -195,6 +214,8 @@ model ProductTechnology {
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   technology Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  sortOrder Int @default(0)
 
   @@unique([productId, technologyId])
 }

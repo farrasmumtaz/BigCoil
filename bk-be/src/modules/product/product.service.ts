@@ -78,11 +78,16 @@ export class ProductService {
       where: {
         slug,
       },
-
       include: {
         collection: true,
 
         galleries: {
+          orderBy: {
+            sortOrder: 'asc',
+          },
+        },
+
+        descriptions: {
           orderBy: {
             sortOrder: 'asc',
           },
@@ -98,6 +103,9 @@ export class ProductService {
           include: {
             technology: true,
           },
+          orderBy: {
+            sortOrder: 'asc',
+          },
         },
       },
     });
@@ -108,13 +116,35 @@ export class ProductService {
       where: {
         collectionId,
       },
-
       include: {
         collection: true,
-      },
 
-      orderBy: {
-        id: 'asc',
+        galleries: {
+          orderBy: {
+            sortOrder: 'asc',
+          },
+        },
+
+        descriptions: {
+          orderBy: {
+            sortOrder: 'asc',
+          },
+        },
+
+        productSpecifications: {
+          orderBy: {
+            sortOrder: 'asc',
+          },
+        },
+
+        productTechnologies: {
+          include: {
+            technology: true,
+          },
+          orderBy: {
+            sortOrder: 'asc',
+          },
+        },
       },
     });
   }

@@ -5,6 +5,8 @@ export const uploadFolders = {
 
   collection: 'collection',
 
+  'collection-detail': 'collection-detail',
+
   product: 'product',
 
   'product-gallery': 'product-gallery',

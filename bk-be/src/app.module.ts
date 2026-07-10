@@ -18,7 +18,9 @@ import { AboutBrandModule } from './modules/about-brand/about-brand.module';
 import { ProductModule } from './modules/product/product.module';
 import { ProductGalleryModule } from './modules/product-gallery/product-gallery.module';
 import { ProductSpecificationModule } from './modules/product-specification/product-specification.module';
-
+import { ProductDescriptionModule } from './modules/product-description/product-description.module';
+import { ProductTechnologyModule } from './modules/product-technology/product-technology.module';
+import { CollectionDetailModule } from './modules/collection-detail/collection-detail.module';
 @Module({
   imports: [
     PrismaModule,
@@ -38,6 +40,9 @@ import { ProductSpecificationModule } from './modules/product-specification/prod
     ProductModule,
     ProductGalleryModule,
     ProductSpecificationModule,
+    ProductDescriptionModule,
+    ProductTechnologyModule,
+    CollectionDetailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
