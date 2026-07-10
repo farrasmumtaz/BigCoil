@@ -36,6 +36,7 @@ export class ContactMessageController {
   }
 
   @Patch(':id')
+  // Method di service nanti hanya memperbarui kolom status saja
   @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() dto: UpdateContactMessageDto) {
     return this.contactMessageService.update(Number(id), dto);

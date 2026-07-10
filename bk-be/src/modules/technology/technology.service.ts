@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { TechnologyType } from '@prisma/client';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -9,14 +10,36 @@ import { UpdateTechnologyDto } from './dto/update-technology.dto';
 export class TechnologyService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createTechnologyDto: CreateTechnologyDto) {
+  create(dto: CreateTechnologyDto) {
     return this.prisma.technology.create({
-      data: createTechnologyDto,
+      data: dto,
     });
   }
 
   findAll() {
     return this.prisma.technology.findMany({
+      orderBy: {
+        id: 'asc',
+      },
+    });
+  }
+
+  findCoil() {
+    return this.prisma.technology.findMany({
+      where: {
+        type: TechnologyType.COIL,
+      },
+      orderBy: {
+        id: 'asc',
+      },
+    });
+  }
+
+  findFoam() {
+    return this.prisma.technology.findMany({
+      where: {
+        type: TechnologyType.FOAM,
+      },
       orderBy: {
         id: 'asc',
       },
@@ -31,12 +54,12 @@ export class TechnologyService {
     });
   }
 
-  update(id: number, updateTechnologyDto: UpdateTechnologyDto) {
+  update(id: number, dto: UpdateTechnologyDto) {
     return this.prisma.technology.update({
       where: {
         id,
       },
-      data: updateTechnologyDto,
+      data: dto,
     });
   }
 

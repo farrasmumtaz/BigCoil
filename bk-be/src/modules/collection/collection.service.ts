@@ -30,7 +30,7 @@ export class CollectionService {
     return this.prisma.collection.findMany({
       include: {
         category: true,
-        detail: true,
+        products: true,
       },
       orderBy: {
         id: 'asc',
@@ -46,7 +46,7 @@ export class CollectionService {
       },
       include: {
         category: true,
-        detail: true,
+        products: true,
       },
     });
   }
@@ -60,7 +60,7 @@ export class CollectionService {
       },
       include: {
         category: true,
-        detail: true,
+        products: true,
       },
     });
   }

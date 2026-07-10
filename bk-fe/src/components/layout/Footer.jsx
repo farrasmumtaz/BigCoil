@@ -1,99 +1,204 @@
-import logo from "../../assets/Logo.png"; // Pastikan 'L' besar sesuai dengan di Navbar Anda
+import { useEffect, useState } from "react";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
+import { SiShopee } from "react-icons/si";
+import SiTokopedia from "../../assets/tokopedia.jpg";
+import { companyApi } from "../../services/company";
 
-import fbIcon from "../../assets/facebook.png";
-import igIcon from "../../assets/instagram.png";
-import ttIcon from "../../assets/tik-tok.png";
-import tokpedIcon from "../../assets/tokopedia.jpg";
-import shopeeIcon from "../../assets/shopee.jpg";
+const API_URL = "http://localhost:3000";
 
 export default function Footer() {
+  const [company, setCompany] = useState(null);
+
+  useEffect(() => {
+    const fetchCompany = async () => {
+      try {
+        const data = await companyApi.get();
+        setCompany(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCompany();
+  }, []);
+
+  if (!company) return null;
+
   return (
-    <footer className="bg-[#FAF9F5] text-stone-800 pt-20 pb-10 border-t border-stone-200">
+    <footer className="border-t border-stone-200 bg-[#FAF9F5] pt-20 pb-10 text-stone-800">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-
-        {/* Grid Konten Utama */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
-
-          {/* Kolom 1: Profil Perusahaan */}
+        <div className="mb-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
+          {/* Company */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <img src={logo} alt="BigKoil Logo" className="h-16 w-auto object-contain self-start" />
+            <img
+              src={`${API_URL}${company.logo}`}
+              alt={company.name}
+              className="h-16 w-auto object-contain self-start"
+            />
+
             <div className="mt-2">
-              <h4 className="font-bold text-lg">PT. Cahaya Buana Furindotama</h4>
-              <p className="text-sm font-medium text-stone-500">Part of Cahaya Buana Group</p>
+              <h4 className="text-lg font-bold">{company.name}</h4>
+
+              <p className="text-sm font-medium text-stone-500">
+                {company.tagline}
+              </p>
             </div>
-            <p className="text-sm text-stone-600 leading-relaxed max-w-sm mt-2">
-              Jl. Panel 1 Kav 5 – 6 Kawasan Propindo Gemilang Sentul<br />
-              Kp. Parung Jambu, Sentul, Kec. Babakan Madang, Kabupaten Bogor,<br />
-              Jawa Barat 16810
+
+            <p className="mt-2 max-w-sm whitespace-pre-line text-sm leading-relaxed text-stone-600">
+              {company.address}
             </p>
           </div>
 
-          {/* Kolom 2: Koleksi */}
+          {/* Koleksi */}
           <div>
-            <h4 className="font-bold text-base mb-5 tracking-wide uppercase text-stone-900">Koleksi</h4>
+            <h4 className="mb-5 text-base font-bold uppercase tracking-wide">
+              Koleksi
+            </h4>
+
             <ul className="flex flex-col gap-3 text-sm text-stone-600">
-              <li><a href="#retail" className="hover:text-stone-900 transition">Retail</a></li>
-              <li><a href="#hospitality" className="hover:text-stone-900 transition">Hospitality</a></li>
+              <li>
+                <a href="#retail" className="hover:text-black">
+                  Retail
+                </a>
+              </li>
+
+              <li>
+                <a href="#hospitality" className="hover:text-black">
+                  Hospitality
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Kolom 3: Informasi */}
+          {/* Informasi */}
           <div>
-            <h4 className="font-bold text-base mb-5 tracking-wide uppercase text-stone-900">Informasi</h4>
+            <h4 className="mb-5 text-base font-bold uppercase tracking-wide">
+              Informasi
+            </h4>
+
             <ul className="flex flex-col gap-3 text-sm text-stone-600">
-              <li><a href="#about" className="hover:text-stone-900 transition">Tentang Kami</a></li>
-              <li><a href="#exhibition" className="hover:text-stone-900 transition">Pameran</a></li>
-              <li><a href="#warranty" className="hover:text-stone-900 transition">Garansi</a></li>
-              <li><a href="#service" className="hover:text-stone-900 transition">Pusat Layanan</a></li>
+              <li>
+                <a href="#about">Tentang Kami</a>
+              </li>
+
+              <li>
+                <a href="#exhibition">Pameran</a>
+              </li>
+
+              <li>
+                <a href="#warranty">Garansi</a>
+              </li>
+
+              <li>
+                <a href="#service">Pusat Layanan</a>
+              </li>
             </ul>
           </div>
 
-          {/* Kolom 4: Kontak, Sosmed & Marketplace */}
+          {/* Contact */}
           <div className="flex flex-col gap-6">
             <div>
-              <h4 className="font-bold text-base mb-4 tracking-wide uppercase text-stone-900">Kontak Kami</h4>
-              <div className="text-sm text-stone-600 flex flex-col gap-2">
-                <p><strong>Whatsapp :</strong><br />+62 852-1587-8059</p>
-                <p className="mt-2"><strong>Email :</strong><br /><a href="mailto:cs.bigkoil@cahayabuana.co.id" className="hover:underline">cs.bigkoil@cahayabuana.co.id</a></p>
+              <h4 className="mb-4 text-base font-bold uppercase tracking-wide">
+                Kontak Kami
+              </h4>
+
+              <div className="flex flex-col gap-3 text-sm text-stone-600">
+                <div>
+                  <strong>Whatsapp</strong>
+
+                  <br />
+
+                  <a
+                    href={`https://wa.me/${company.whatsapp}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    +{company.whatsapp}
+                  </a>
+                </div>
+
+                <div>
+                  <strong>Email</strong>
+
+                  <br />
+
+                  <a href={`mailto:${company.email}`}>
+                    {company.email}
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* Tombol Sosial Media Berbasis Teks/Kotak Hitam */}
-
+            {/* Social */}
             <div>
-              <h4 className="font-bold text-sm mb-3 tracking-wide uppercase text-stone-900">Social Media</h4>
+              <h4 className="mb-3 text-sm font-bold uppercase tracking-wide">
+                Social Media
+              </h4>
+
               <div className="flex gap-3">
-                <a href="https://www.facebook.com/profile.php?id=61570591191315" className="w-10 h-10 bg-black rounded-xl flex items-center justify-center hover:opacity-80 transition p-2.5">
-                  <img src={fbIcon} alt="Facebook" className="w-full h-full object-contain invert" />
+                <a
+                  href={company.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-black text-white transition hover:opacity-80"
+                >
+                  <FaFacebookF size={18} />
                 </a>
-                <a href="https://www.instagram.com/bigkoil.springbed/" className="w-10 h-10 bg-black rounded-xl flex items-center justify-center hover:opacity-80 transition p-2.5">
-                  <img src={igIcon} alt="Instagram" className="w-full h-full object-contain invert" />
+
+                <a
+                  href={company.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-black text-white transition hover:opacity-80"
+                >
+                  <FaInstagram size={18} />
                 </a>
-                <a href="https://www.tiktok.com/@bigkoilspringbedofficial" className="w-10 h-10 bg-black rounded-xl flex items-center justify-center hover:opacity-80 transition p-2.5">
-                  <img src={ttIcon} alt="TikTok" className="w-full h-full object-contain invert" />
+
+                <a
+                  href={company.tiktok}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-black text-white transition hover:opacity-80"
+                >
+                  <FaTiktok size={18} />
                 </a>
               </div>
 
-              {/* Bagian Marketplaces menggunakan Image */}
-              <h4 className="font-bold text-sm mb-3 mt-5 tracking-wide uppercase text-stone-900">Market Places</h4>
-              <div className="flex gap-4 items-center">
-                <a href=" https://www.tokopedia.com/biglandspringbed" className="hover:scale-105 transition w-12 h-12">
-                  <img src={tokpedIcon} alt="Tokopedia" className="w-full h-full object-contain" />
+              <h4 className="mt-6 mb-3 text-sm font-bold uppercase tracking-wide">
+                Market Places
+              </h4>
+
+              <div className="flex gap-3">
+                <a
+                  href={company.tokopedia}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#42B549] text-white transition hover:opacity-80"
+                >
+                  <img
+                    src={SiTokopedia}
+                    alt="Tokopedia"
+                    className="h-5 w-5 object-contain"
+                  />
                 </a>
-                <a href="https://shopee.co.id/biglandspringbed" className="hover:scale-105 transition w-12 h-12">
-                  <img src={shopeeIcon} alt="Shopee" className="w-full h-full object-contain" />
+
+                <a
+                  href={company.shopee}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EE4D2D] text-white transition hover:opacity-80"
+                >
+                  <SiShopee size={20} />
                 </a>
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
 
-      {/* Copyright Bar */}
-      <div className="w-full bg-black py-4 mt-10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 text-center text-xs text-stone-400">
+      <div className="mt-10 w-full bg-black py-4">
+        <div className="mx-auto max-w-7xl px-6 text-center text-xs text-stone-400">
           Copyright © 2026 All Rights Reserved. | Cahaya Buana Group
         </div>
       </div>

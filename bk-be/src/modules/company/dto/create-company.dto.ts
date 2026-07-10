@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
 
 export class CreateCompanyDto {
   @IsString()
@@ -8,8 +8,34 @@ export class CreateCompanyDto {
   tagline!: string;
 
   @IsString()
-  description!: string;
+  address!: string;
 
   @IsString()
   logo!: string;
+
+  @IsString()
+  whatsapp!: string;
+
+  @IsEmail()
+  email!: string;
+
+  @IsOptional()
+  @IsString()
+  facebook?: string;
+
+  @IsOptional()
+  @IsString()
+  instagram?: string;
+
+  @IsOptional()
+  @IsString()
+  tiktok?: string;
+
+  @IsOptional()
+  @IsString()
+  shopee?: string;
+
+  @IsOptional()
+  @IsString()
+  tokopedia?: string;
 }

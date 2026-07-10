@@ -2,20 +2,13 @@ import { diskStorage } from 'multer';
 import { extname, join } from 'path';
 import * as fs from 'fs';
 
-const prefixes: Record<string, string> = {
-  company: 'logo',
-  hero: 'hero',
-  collection: 'collect',
-  technology: 'technology',
-  'dream-better': 'healthy',
-  testimonial: 'testimonial',
-};
+import { uploadFolders } from './utils/upload-folder';
 
 export const storage = diskStorage({
   destination(req, file, cb) {
     const folder = req.params.folder;
 
-    if (!folder || !(folder in prefixes)) {
+    if (!folder || !(folder in uploadFolders)) {
       return cb(new Error('Invalid upload folder'), '');
     }
 
@@ -33,13 +26,7 @@ export const storage = diskStorage({
   filename(req, file, cb) {
     const folder = req.params.folder;
 
-    if (!folder || !(folder in prefixes)) {
-      return cb(new Error('Invalid upload folder'), '');
-    }
-
-    const prefix = prefixes[folder];
-
-    const filename = `${prefix}-${Date.now()}${extname(
+    const filename = `${folder}-${Date.now()}${extname(
       file.originalname,
     ).toLowerCase()}`;
 

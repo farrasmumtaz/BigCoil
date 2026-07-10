@@ -21,10 +21,10 @@ export default function Testimonial() {
   }, []);
 
   return (
-    <section className="py-20 bg-[#15130F]">
+    <section className="py-20 bg-[#FAF6EE]">
       <div className="mx-auto max-w-7xl px-6">
 
-        <h2 className="mb-12 text-center text-4xl text-[#F5F0E6]">
+        <h2 className="mb-12 text-center text-4xl text-[#2A2010]">
           Testimonial
         </h2>
 
@@ -33,7 +33,7 @@ export default function Testimonial() {
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="overflow-hidden rounded-xl shadow-lg"
+              className="overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5"
             >
               <img
                 src={`${BASE_URL}${item.image}`}

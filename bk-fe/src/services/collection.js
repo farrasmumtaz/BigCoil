@@ -1,24 +1,18 @@
 import api from "./api";
 
-export const getRetailCollections = async () => {
-  const response = await api.get("/collection/retail");
-  return response.data;
-};
+export const collectionApi = {
+  getRetail: async () => {
+    const res = await api.get("/collection/retail");
+    return res.data;
+  },
 
-export const getHospitalityCollections = async () => {
-  const response = await api.get("/collection/hospitality");
-  return response.data;
-};
+  getHospitality: async () => {
+    const res = await api.get("/collection/hospitality");
+    return res.data;
+  },
 
-export const getCollection = async (id) => {
-  const response = await api.get(`/collection/${id}`);
-  return response.data;
-};
-
-export const getCollectionDetail = async (id) => {
-  const response = await api.get(
-    `/collection-detail/collection/${id}`
-  );
-
-  return response.data;
+  getBySlug: async (slug) => {
+    const res = await api.get(`/collection/slug/${slug}`);
+    return res.data;
+  },
 };

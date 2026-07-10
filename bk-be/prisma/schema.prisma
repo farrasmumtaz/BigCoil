@@ -13,172 +13,285 @@ datasource db {
 }
 
 model Company {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  name        String
-  tagline     String
-  description String   @db.Text
-  logo        String
+  name    String
+  tagline String
+  address String
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  logo String
+
+  whatsapp String
+  email    String
+
+  facebook  String?
+  instagram String?
+  tiktok    String?
+
+  shopee    String?
+  tokopedia String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Hero {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   title       String
   subtitle    String?
-  description String   @db.Text
+  description String  @db.Text
 
-  buttonText  String
-  buttonLink  String
+  buttonText String
+  buttonLink String
 
-  image       String
+  image String
 
-  updatedAt   DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model CollectionCategory {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  name        String   @unique
-  slug        String   @unique
+  name String @unique
+  slug String @unique
 
   collections Collection[]
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Collection {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  categoryId  Int
+  categoryId Int
 
-  title       String
-  slug        String   @unique
+  title String
+  slug  String @unique
 
-  description String   @db.Text
+  description String @db.Text
 
-  coverImage  String
+  coverImage String
 
-  category    CollectionCategory@relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category CollectionCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
-  detail      CollectionDetail?
+  products Product[]
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model CollectionDetail {
-  id            Int      @id @default(autoincrement())
+model Product {
+  id Int @id @default(autoincrement())
 
-  collectionId  Int      @unique
+  collectionId Int
 
-  description   String   @db.Text
+  title String
+  slug  String @unique
 
-  videoUrl      String?
+  shortDescription String @db.Text
 
-  collection    Collection@relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  heroImage String
 
-  gallery       CollectionGallery[]
+  videoUrl String?
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  galleries ProductGallery[]
+
+  descriptions ProductDescription[]
+  
+  productSpecifications ProductSpecification[]
+
+  productTechnologies ProductTechnology[]
+
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
 }
 
-model CollectionGallery {
-  id          Int      @id @default(autoincrement())
+model ProductGallery {
+  id Int @id @default(autoincrement())
 
-  detailId    Int
+  productId Int
 
-  title       String
+  image String
 
-  image       String
+  sortOrder Int @default(0)
 
-  detail      CollectionDetail@relation(fields: [detailId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductSpecification {
+  id Int @id @default(autoincrement())
+
+  productId Int
+
+  label String
+
+  value String
+
+  icon String?
+
+  sortOrder Int @default(0)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductDescription {
+  id Int @id @default(autoincrement())
+
+  productId Int
+
+  title String
+
+  description String @db.Text
+
+  sortOrder Int @default(0)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TechnologyType {
+  COIL
+  FOAM
 }
 
 model Technology {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  title       String
+  type TechnologyType
 
-  description String   @db.Text
+  title String
 
-  image       String
+  subtitle String?
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  description String @db.Text
+
+  image String
+
+  products ProductTechnology[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductTechnology {
+  id Int @id @default(autoincrement())
+
+  productId Int
+
+  technologyId Int
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  technology Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, technologyId])
 }
 
 model DreamBetter {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  title       String
+  title String
 
-  slug        String   @unique
+  slug String @unique
 
-  description String   @db.Text
+  description String @db.Text
 
-  image       String
+  image String
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Testimonial {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  image       String
+  image String
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Dealer {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  name        String
+  name String
 
-  island      String
-  province    String
-  city        String
+  island String
 
-  address     String   @db.Text
+  province String
 
-  phone       String?
+  city String
 
-  mapsUrl     String?
+  address String @db.Text
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  phone String?
+
+  mapsUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ContactMessage {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  name        String
+  name String
 
-  email       String
+  email String
 
-  phone       String?
+  phone String?
 
-  message     String   @db.Text
+  message String @db.Text
 
-  createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
 }
 
 model Admin {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  username    String   @unique
+  username String @unique
 
-  password    String
+  password String
 
-  createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
+}
+
+model AboutCompany {
+  id Int @id @default(autoincrement())
+
+  title String
+
+  subtitle String
+
+  description String @db.Text
+
+  image String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AboutBrand {
+  id Int @id @default(autoincrement())
+
+  title String
+
+  description String @db.Text
+
+  image String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

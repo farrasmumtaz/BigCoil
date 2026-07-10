@@ -13,8 +13,11 @@ import { ContactModule } from './modules/contact/contact.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { CollectionCategoryModule } from './modules/collection-category/collection-category.module';
-import { CollectionDetailModule } from './modules/collection-detail/collection-detail.module';
-import { CollectionGalleryModule } from './modules/collection-gallery/collection-gallery.module';
+import { AboutCompanyModule } from './modules/about-company/about-company.module';
+import { AboutBrandModule } from './modules/about-brand/about-brand.module';
+import { ProductModule } from './modules/product/product.module';
+import { ProductGalleryModule } from './modules/product-gallery/product-gallery.module';
+import { ProductSpecificationModule } from './modules/product-specification/product-specification.module';
 
 @Module({
   imports: [
@@ -30,8 +33,11 @@ import { CollectionGalleryModule } from './modules/collection-gallery/collection
     AuthModule,
     UploadModule,
     CollectionCategoryModule,
-    CollectionDetailModule,
-    CollectionGalleryModule,
+    AboutCompanyModule,
+    AboutBrandModule,
+    ProductModule,
+    ProductGalleryModule,
+    ProductSpecificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

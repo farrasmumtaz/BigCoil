@@ -1,7 +1,13 @@
 import api from "./api";
 
-export const getTechnologies = async () => {
-  const response = await api.get("/technology");
+export const technologyApi = {
+  getCoil: async () => {
+    const res = await api.get("/technology/coil");
+    return res.data;
+  },
 
-  return response.data;
+  getFoam: async () => {
+    const res = await api.get("/technology/foam");
+    return res.data;
+  },
 };
