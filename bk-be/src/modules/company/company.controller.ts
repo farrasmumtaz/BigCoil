@@ -28,6 +28,11 @@ export class CompanyController {
     return this.companyService.findAll();
   }
 
+  @Get('main')
+  findMain() {
+    return this.companyService.findMain();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.companyService.findOne(+id);

@@ -152,7 +152,7 @@ export default function Collection() {
             className="text-4xl font-medium text-[#2A2010] md:text-5xl"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
-            Retail Collection
+            RETAIL COLLECTION
           </h2>
           <Flourish className="mx-auto mt-5" />
         </Reveal>
@@ -207,13 +207,13 @@ export default function Collection() {
                   <div className={`relative ${reversed ? "md:order-1" : ""}`}>
                     <Link
                       to={item.link}
-                      className="group block overflow-hidden rounded-[2rem] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.2)] ring-1 ring-black/5"
+                      className="group block overflow-hidden rounded-4x1 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.2)] ring-1 ring-black/5"
                     >
                       <div className="relative overflow-hidden">
                         <img
                           src={item.image}
                           alt={item.title}
-                          className="block h-auto w-full scale-100 transition duration-[1400ms] ease-out group-hover:scale-[1.05]"
+                          className="block h-auto w-full scale-100 transition duration-1400 ease-out group-hover:scale-[1.05]"
                         />
                         <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" />
                         <div className="absolute inset-0 bg-linear-to-t from-black/10 via-transparent to-transparent" />
@@ -242,7 +242,7 @@ export default function Collection() {
                 className="text-4xl font-medium text-[#2A2010] md:text-5xl"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}
               >
-                Hospitality Collection
+                HOSPITALITY COLLECTION
               </h2>
               <Flourish className="mx-auto mt-5 mb-8" />
               <p className="mx-auto max-w-3xl leading-relaxed text-[#6B5F4A]">
@@ -264,7 +264,7 @@ export default function Collection() {
                 <img
                   src={hospitality.image}
                   alt="Hospitality Collection"
-                  className="block h-auto w-full transition duration-[1400ms] ease-out group-hover:scale-105"
+                  className="block h-auto w-full transition duration-1400 ease-out group-hover:scale-105"
                 />
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" />
               </div>

@@ -20,7 +20,13 @@ export class CompanyService {
       },
     });
   }
-
+  findMain() {
+    return this.prisma.company.findFirst({
+      orderBy: {
+        id: 'asc',
+      },
+    });
+  }
   findOne(id: number) {
     return this.prisma.company.findUnique({
       where: {

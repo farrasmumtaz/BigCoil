@@ -9,7 +9,7 @@ const menus = [
   { name: "Tentang Kami", path: "/about" },
   { name: "Teknologi", path: "/technology" },
   { name: "Dream Better", path: "/dream-better" },
-  { name: "Pameran", path: "/gallery" },
+  { name: "Pameran", path: "/exhibition" },
   { name: "Dealer", path: "/dealer" },
   { name: "Kontak Kami", path: "/contact" },
 ];

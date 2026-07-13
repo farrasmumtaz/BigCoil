@@ -1,7 +1,15 @@
 import api from "./api";
 
-export const getDreamBetter = async () => {
-  const response = await api.get("/dream-better");
+export const dreamBetterApi = {
+  getAll() {
+    return api
+      .get("/dream-better")
+      .then((res) => res.data);
+  },
 
-  return response.data;
+  getBySlug(slug) {
+    return api
+      .get(`/dream-better/slug/${slug}`)
+      .then((res) => res.data);
+  },
 };

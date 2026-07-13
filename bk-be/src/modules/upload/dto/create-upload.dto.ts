@@ -11,6 +11,14 @@ export class CreateUploadDto {
     'testimonial',
     'gallery',
     'video',
+    'product',
+    'product-gallery',
+    'product-specification',
+    'product-description',
+    'product-technology',
+    'collection-detail',
+    'exhibition',
+    'dream-better-section',
   ])
   folder!: string;
 }

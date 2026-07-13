@@ -67,7 +67,7 @@ export default function CollectionList() {
             className="text-4xl font-medium text-[#2A2010] md:text-5xl"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
-            {isHospitality ? "Hospitality Collection" : "Retail Collection"}
+            {isHospitality ? "HOSPITALITY COLLECTION" : "RETAIL COLLECTION"}
           </h1>
           <Flourish className="mx-auto mt-5" />
         </div>
@@ -84,7 +84,7 @@ export default function CollectionList() {
                   <img
                     src={`${API_URL}${item.coverImage}`}
                     alt={item.title}
-                    className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105"
+                    className="aspect-3/4 w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" />
                 </div>

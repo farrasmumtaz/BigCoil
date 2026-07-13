@@ -229,10 +229,26 @@ model DreamBetter {
 
   description String @db.Text
 
-  image String
+  heroImage String
+
+  sections DreamBetterSection[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model DreamBetterSection {
+  id Int @id @default(autoincrement())
+
+  dreamBetterId Int
+
+  title String
+
+  content String @db.Text
+
+  order Int
+
+  dreamBetter DreamBetter@relation(fields: [dreamBetterId], references: [id], onDelete: Cascade)
 }
 
 model Testimonial {
@@ -312,6 +328,24 @@ model AboutBrand {
   description String @db.Text
 
   image String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Exhibition {
+  id Int @id @default(autoincrement())
+
+  title String
+  slug String @unique
+
+  location String
+
+  eventDate DateTime
+
+  description String @db.Text
+
+  coverImage String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

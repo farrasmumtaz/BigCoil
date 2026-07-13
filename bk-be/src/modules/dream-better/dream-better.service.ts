@@ -31,6 +31,20 @@ export class DreamBetterService {
     });
   }
 
+  findBySlug(slug: string) {
+    return this.prisma.dreamBetter.findUnique({
+      where: {
+        slug,
+      },
+      include: {
+        sections: {
+          orderBy: {
+            order: 'asc',
+          },
+        },
+      },
+    });
+  }
   update(id: number, updateDreamBetterDto: UpdateDreamBetterDto) {
     return this.prisma.dreamBetter.update({
       where: {

@@ -79,7 +79,7 @@ export default function About() {
           <img
             src={`${API_URL}${company.image}`}
             alt={company.title}
-            className="block h-auto w-full transition duration-[1400ms] ease-out group-hover:scale-[1.02]"
+            className="block h-auto w-full transition duration-1400 ease-out group-hover:scale-[1.02]"
           />
         </div>
 
@@ -118,7 +118,7 @@ export default function About() {
             <img
               src={`${API_URL}${brand.image}`}
               alt={brand.title}
-              className="block h-auto w-full transition duration-[1400ms] ease-out group-hover:scale-105"
+              className="block h-auto w-full transition duration-1400 ease-out group-hover:scale-105"
             />
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" />
           </div>

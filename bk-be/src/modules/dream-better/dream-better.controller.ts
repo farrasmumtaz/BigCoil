@@ -14,7 +14,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateDreamBetterDto } from './dto/create-dream-better.dto';
 import { UpdateDreamBetterDto } from './dto/update-dream-better.dto';
 
-@Controller('dreambetter')
+@Controller('dream-better')
 export class DreamBetterController {
   constructor(private readonly dreamBetterService: DreamBetterService) {}
 
@@ -27,6 +27,11 @@ export class DreamBetterController {
   @Get()
   findAll() {
     return this.dreamBetterService.findAll();
+  }
+
+  @Get('slug/:slug')
+  findBySlug(@Param('slug') slug: string) {
+    return this.dreamBetterService.findBySlug(slug);
   }
 
   @Get(':id')

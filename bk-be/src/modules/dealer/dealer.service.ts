@@ -46,32 +46,44 @@ export class DealerService {
     });
   }
 
-  findByIsland(island: string) {
-    return this.prisma.dealer.findMany({
+  async findIslands() {
+    const islands = await this.prisma.dealer.findMany({
+      distinct: ['island'],
+      select: {
+        island: true,
+      },
+      orderBy: {
+        island: 'asc',
+      },
+    });
+
+    return islands.map((item) => item.island);
+  }
+
+  async findCities(island: string) {
+    const cities = await this.prisma.dealer.findMany({
       where: {
         island,
       },
-      orderBy: {
-        city: 'asc',
-      },
-    });
-  }
-
-  findByProvince(province: string) {
-    return this.prisma.dealer.findMany({
-      where: {
-        province,
+      distinct: ['city'],
+      select: {
+        city: true,
       },
       orderBy: {
         city: 'asc',
       },
     });
+
+    return cities.map((item) => item.city);
   }
 
-  findByCity(city: string) {
+  async findByCity(city: string) {
     return this.prisma.dealer.findMany({
       where: {
         city,
+      },
+      orderBy: {
+        name: 'asc',
       },
     });
   }

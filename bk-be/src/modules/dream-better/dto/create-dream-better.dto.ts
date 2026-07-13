@@ -11,5 +11,5 @@ export class CreateDreamBetterDto {
   description!: string;
 
   @IsString()
-  image!: string;
+  heroImage!: string;
 }

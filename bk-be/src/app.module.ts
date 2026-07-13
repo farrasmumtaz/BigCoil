@@ -21,6 +21,8 @@ import { ProductSpecificationModule } from './modules/product-specification/prod
 import { ProductDescriptionModule } from './modules/product-description/product-description.module';
 import { ProductTechnologyModule } from './modules/product-technology/product-technology.module';
 import { CollectionDetailModule } from './modules/collection-detail/collection-detail.module';
+import { ExhibitionModule } from './modules/exhibition/exhibition.module';
+import { DreamBetterSectionModule } from './modules/dream-better-section/dream-better-section.module';
 @Module({
   imports: [
     PrismaModule,
@@ -43,6 +45,8 @@ import { CollectionDetailModule } from './modules/collection-detail/collection-d
     ProductDescriptionModule,
     ProductTechnologyModule,
     CollectionDetailModule,
+    ExhibitionModule,
+    DreamBetterSectionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

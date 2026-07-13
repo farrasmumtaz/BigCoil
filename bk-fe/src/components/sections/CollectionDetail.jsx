@@ -140,7 +140,7 @@ export default function CollectionDetail() {
                     <img
                       src={`${API_URL}${product.heroImage}`}
                       alt={product.title}
-                      className="aspect-[3/4] w-full object-cover duration-500 group-hover:scale-105"
+                      className="aspect-3/4 w-full object-cover duration-500 group-hover:scale-105"
                     />
                   </div>
 

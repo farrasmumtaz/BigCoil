@@ -6,11 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+
 import { DealerService } from './dealer.service';
 import { CreateDealerDto } from './dto/create-dealer.dto';
 import { UpdateDealerDto } from './dto/update-dealer.dto';
-import { UseGuards } from '@nestjs/common';
+
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('dealer')
@@ -28,14 +30,14 @@ export class DealerController {
     return this.dealerService.findAll();
   }
 
-  @Get('island/:island')
-  findByIsland(@Param('island') island: string) {
-    return this.dealerService.findByIsland(island);
+  @Get('islands')
+  findIslands() {
+    return this.dealerService.findIslands();
   }
 
-  @Get('province/:province')
-  findByProvince(@Param('province') province: string) {
-    return this.dealerService.findByProvince(province);
+  @Get('island/:island')
+  findCities(@Param('island') island: string) {
+    return this.dealerService.findCities(island);
   }
 
   @Get('city/:city')

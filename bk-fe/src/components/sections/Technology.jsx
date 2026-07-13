@@ -121,35 +121,22 @@ export default function Technology() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mb-24 text-center">
-          <p className="mb-3 text-xs uppercase tracking-[0.4em] text-[#B8935F]">
-            Signature Innovation
-          </p>
-          <h2
-            className="text-4xl font-medium text-[#2A2010] md:text-5xl"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            Technology
-          </h2>
-          <Flourish className="mx-auto mt-5" />
-        </div>
-
         {/* ================= COIL ================= */}
         <div className="mb-32">
           <TechGroup
             eyebrow="Precision Support"
-            title="Pocket Coil Technology"
+            title="POCKET COIL TECHNOLOGY"
             items={coil}
           />
         </div>
 
         {/* Divider */}
-        <div className="mb-32 h-px w-full bg-gradient-to-r from-transparent via-[#B8935F]/30 to-transparent" />
+        <div className="mb-32 h-px w-full bg-linear-to-r from-transparent via-[#B8935F]/30 to-transparent" />
 
         {/* ================= FOAM ================= */}
         <TechGroup
           eyebrow="Layered Comfort"
-          title="Foam Technology"
+          title="FOAM TECHNOLOGY"
           items={foam}
         />
       </div>
