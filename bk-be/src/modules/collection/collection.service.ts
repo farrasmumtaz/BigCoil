@@ -81,6 +81,10 @@ export class CollectionService {
       where: {
         id,
       },
+      include: {
+        category: true,
+        products: true,
+      },
     });
   }
 

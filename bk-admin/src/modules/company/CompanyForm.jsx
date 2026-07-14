@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import CompanyService from "./company.service";
+import { uploadApi } from "../../services/upload";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -26,7 +27,20 @@ export default function CompanyForm({
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    setForm(company);
+    if (!company) return;
+
+    setForm({
+      name: company.name ?? "",
+      tagline: company.tagline ?? "",
+      address: company.address ?? "",
+      whatsapp: company.whatsapp ?? "",
+      email: company.email ?? "",
+      facebook: company.facebook ?? "",
+      instagram: company.instagram ?? "",
+      tiktok: company.tiktok ?? "",
+      shopee: company.shopee ?? "",
+      tokopedia: company.tokopedia ?? "",
+    });
   }, [company]);
 
   const handleChange = (e) => {
@@ -42,19 +56,22 @@ export default function CompanyForm({
     setSaving(true);
 
     try {
-      const formData = new FormData();
-
-      Object.entries(form).forEach(([key, value]) => {
-        formData.append(key, value ?? "");
-      });
+      let payload = {
+        ...form,
+      };
 
       if (logo) {
-        formData.append("logo", logo);
+        const uploaded = await uploadApi.upload(
+          "company",
+          logo,
+        );
+
+        payload.logo = uploaded.url;
       }
 
       await CompanyService.updateCompany(
         company.id,
-        formData,
+        payload,
       );
 
       alert("Company berhasil diperbarui.");

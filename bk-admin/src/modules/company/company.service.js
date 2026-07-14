@@ -6,18 +6,9 @@ const CompanyService = {
     return data;
   },
 
-  async updateCompany(id, formData) {
-    const { data } = await api.patch(
-      `/company/${id}`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
-    );
-
-    return data;
+  async updateCompany(id, data) {
+    const response = await api.patch(`/company/${id}`, data);
+    return response.data;
   },
 };
 

@@ -2,10 +2,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import Login from "./pages/Login";
+
+import DashboardLayout from "./layouts/DashboardLayout";
+
 import Dashboard from "./pages/Dashboard";
 
+import CompanyPage from "./modules/company/CompanyPage";
+import HeroPage from "./modules/hero/HeroPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+import CollectionCategoryPage from "./modules/collection-category/CollectionCategoryPage";
+import CollectionPage from "./modules/collection/CollectionPage";
+import CollectionDetailPage from "./modules/collection-detail/CollectionDetailPage"
+import ProductPage from "./modules/product/ProductPage";
+import ProductGalleryPage from "./modules/product-gallery/ProductGalleryPage";
+import ProductDescriptionPage from "./modules/product-description/ProductDescriptionPage";
+import ProductSpecificationPage from "./modules/product-specification/ProductSpecificationPage";
+import ProductTechnologyPage from "./modules/product-technology/ProductTechnologyPage";
+import TechnologyPage from "./modules/technology/TechnologyPage";
 
 function App() {
   return (
@@ -13,6 +27,7 @@ function App() {
       <Toaster position="top-right" />
 
       <Routes>
+
         <Route
           path="/"
           element={
@@ -32,13 +47,40 @@ function App() {
         />
 
         <Route
-          path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <DashboardLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+
+          <Route path="/company" element={<CompanyPage />} />
+
+          <Route path="/hero" element={<HeroPage />} />
+
+          <Route path="/collection-category" element={<CollectionCategoryPage />} />
+
+          <Route path="/collection" element={<CollectionPage />} />
+
+          <Route path="/collection-detail" element={<CollectionDetailPage />} />
+
+          <Route path="/product" element={<ProductPage />} />
+
+          <Route path="/product" element={<ProductPage />} />
+
+          <Route path="/product-gallery" element={<ProductGalleryPage />}/>
+
+          <Route path="/product-description" element={<ProductDescriptionPage />}/>
+
+          <Route path="/product-specification" element={<ProductSpecificationPage />}/>
+
+          <Route path="/product-technology" element={<ProductTechnologyPage />}/>
+
+          <Route path="/technology" element={<TechnologyPage />}/>
+
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );

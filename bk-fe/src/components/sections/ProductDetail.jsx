@@ -4,8 +4,7 @@ import { useParams } from "react-router-dom";
 import { productApi } from "../../services/product";
 
 import ProductHero from "./ProductHero";
-import ProductDescription from "./ProductDescription";
-import ProductGallery from "./ProductGallery";
+import ProductOverview from "./ProductOverview";
 import ProductTechnology from "./ProductTechnology";
 import ProductVideo from "./ProductVideo";
 
@@ -32,7 +31,7 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <section className="py-32 text-center">
+      <section className="py-32 text-center text-[#6B5F4A]">
         Loading...
       </section>
     );
@@ -40,7 +39,7 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <section className="py-32 text-center">
+      <section className="py-32 text-center text-[#6B5F4A]">
         Product not found.
       </section>
     );
@@ -50,12 +49,10 @@ export default function ProductDetail() {
     <>
       <ProductHero product={product} />
 
-      <ProductDescription
-        descriptions={product.productDescriptions}
-      />
-
-      <ProductGallery
+      <ProductOverview
+        descriptions={product.descriptions}
         galleries={product.galleries}
+        specifications={product.productSpecifications}
       />
 
       <ProductTechnology

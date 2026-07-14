@@ -41,6 +41,7 @@ export class CompanyController {
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
+    console.log(updateCompanyDto);
     return this.companyService.update(+id, updateCompanyDto);
   }
 

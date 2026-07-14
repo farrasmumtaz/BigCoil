@@ -91,7 +91,7 @@ function mapCollection(item) {
 
 export default function Collection() {
   const [retailCollections, setRetailCollections] = useState([]);
-  const [hospitality, setHospitality] = useState(null);
+  const [hospitalityCollections, setHospitalityCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -105,8 +105,9 @@ export default function Collection() {
 
         setRetailCollections(retailData.map(mapCollection));
 
-        const hospitalityMapped = hospitalityData.map(mapCollection);
-        setHospitality(hospitalityMapped[0] || null);
+        setHospitalityCollections(
+          hospitalityData.map(mapCollection)
+        );
       } catch (err) {
         console.error(err);
         setError("Gagal memuat data koleksi.");
@@ -235,42 +236,57 @@ export default function Collection() {
           })}
         </div>
 
-        {hospitality && (
-          <Reveal className="mt-40">
-            <Reveal className="mb-16 text-center">
-              <h2
-                className="text-4xl font-medium text-[#2A2010] md:text-5xl"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                HOSPITALITY COLLECTION
-              </h2>
-              <Flourish className="mx-auto mt-5 mb-8" />
-              <p className="mx-auto max-w-3xl leading-relaxed text-[#6B5F4A]">
-                {hospitality.description}
-              </p>
-              <div className="mt-8">
-                <Link
-                  to={hospitality.link}
-                  className="group inline-flex items-center gap-2 rounded-full border border-[#B8935F]/50 px-6 py-3 text-sm tracking-wide text-[#8A6A2E] transition-colors hover:bg-[#B8935F] hover:text-white"
-                >
-                  Explore Hospitality
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
-                </Link>
-              </div>
-            </Reveal>
+        {hospitalityCollections.length > 0 && (
+  <Reveal className="mt-40">
+    <Reveal className="mb-16 text-center">
+      <h2
+        className="text-4xl font-medium text-[#2A2010] md:text-5xl"
+        style={{ fontFamily: "'Cormorant Garamond', serif" }}
+      >
+        HOSPITALITY COLLECTION
+      </h2>
+      <Flourish className="mx-auto mt-5 mb-8" />
+      <p className="mx-auto max-w-3xl leading-relaxed text-[#6B5F4A]">
+        {/* deskripsi section */}
+      </p>
+      <div className="mt-8">
+        <Link
+          to="/collection/hospitality"
+          className="group inline-flex items-center gap-2 rounded-full border border-[#B8935F]/50 px-6 py-3 text-sm tracking-wide text-[#8A6A2E] transition-colors hover:bg-[#B8935F] hover:text-white"
+        >
+          Explore Hospitality
+          <span className="transition-transform group-hover:translate-x-1">→</span>
+        </Link>
+      </div>
+    </Reveal>
 
-            <Reveal delay={150}>
-              <div className="group relative mx-auto max-w-6xl overflow-hidden rounded-3xl shadow-[0_40px_100px_-30px_rgba(42,32,16,0.35)] ring-1 ring-black/5">
-                <img
-                  src={hospitality.image}
-                  alt="Hospitality Collection"
-                  className="block h-auto w-full transition duration-1400 ease-out group-hover:scale-105"
-                />
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" />
-              </div>
-            </Reveal>
-          </Reveal>
-        )}
+    <div className="mx-auto flex max-w-6xl flex-col gap-12">
+      {hospitalityCollections.map((item, i) => (
+        <Reveal key={item.id} delay={150 + i * 100}>
+          <Link
+            to={item.link}
+            className="group relative block overflow-hidden rounded-3xl shadow-[0_40px_100px_-30px_rgba(42,32,16,0.35)] ring-1 ring-black/5"
+          >
+            <img
+              src={item.image}
+              alt={item.title}
+              className="w-full rounded-3xl"
+            />
+
+            <div className="p-6">
+              <h3 className="text-3xl">
+                {item.title}
+              </h3>
+              <p>{item.description}</p>
+            </div>
+
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" />
+          </Link>
+        </Reveal>
+      ))}
+    </div>
+  </Reveal>
+)}
       </div>
     </section>
   );

@@ -35,8 +35,11 @@ export class ProductService {
     return this.prisma.product.findMany({
       include: {
         collection: true,
+        galleries: true,
+        descriptions: true,
+        productSpecifications: true,
+        productTechnologies: true,
       },
-
       orderBy: {
         id: 'asc',
       },

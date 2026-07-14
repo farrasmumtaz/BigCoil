@@ -10,7 +10,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-
+  
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -38,7 +38,7 @@ export default function Login() {
       setLoading(true);
 
       const data = await authApi.login(form);
-
+      console.log(data);
       localStorage.setItem("token", data.access_token);
 
       toast.success("Login berhasil");
