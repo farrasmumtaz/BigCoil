@@ -20,6 +20,7 @@ import ProductDescriptionPage from "./modules/product-description/ProductDescrip
 import ProductSpecificationPage from "./modules/product-specification/ProductSpecificationPage";
 import ProductTechnologyPage from "./modules/product-technology/ProductTechnologyPage";
 import TechnologyPage from "./modules/technology/TechnologyPage";
+import DreamBetterPage from "./modules/dream-better/DreamBetterPage";
 
 function App() {
   return (
@@ -79,6 +80,7 @@ function App() {
 
           <Route path="/technology" element={<TechnologyPage />}/>
 
+          <Route path="/dream-better" element={<DreamBetterPage />}/>
         </Route>
 
       </Routes>

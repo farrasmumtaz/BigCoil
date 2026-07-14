@@ -114,7 +114,19 @@ export default function Sidebar() {
     {
       name: "Dream Better",
       icon: Sparkles,
-      path: "/dream-better",
+      key: "dream-better",
+      children: [
+        {
+          name: "Dream Better List",
+          icon: Sparkles,
+          path: "/dream-better",
+        },
+        {
+          name: "Dream Better Section",
+          icon: FileImage,
+          path: "/dream-better-section",
+        }
+      ],
     },
     {
       name: "Exhibition",
