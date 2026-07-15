@@ -2,7 +2,6 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import {
-  LayoutDashboard,
   Building2,
   Image,
   Boxes,
@@ -23,10 +22,11 @@ import {
 export default function Sidebar() {
   const navigate = useNavigate();
 
-  // ganti 2 state terpisah jadi 1 object, key = menu.key
   const [openMenus, setOpenMenus] = useState({
-    collections: true,
-    products: true,
+    about: false,
+    collections: false,
+    products: false,
+    "dream-better": false,
   });
 
   const toggleMenu = (key) => {
@@ -36,26 +36,29 @@ export default function Sidebar() {
     }));
   };
 
+  // sudah diurutkan alfabetis berdasarkan "name", Dashboard dihapus
   const menus = [
     {
-      name: "Dashboard",
-      icon: LayoutDashboard,
-      path: "/dashboard",
-    },
-    {
-      name: "Company",
+      name: "About",
       icon: Building2,
-      path: "/company",
-    },
-    {
-      name: "Hero",
-      icon: Image,
-      path: "/hero",
+      key: "about",
+      children: [
+        {
+          name: "About Company",
+          icon: Building2,
+          path: "/about-company",
+        },
+        {
+          name: "About Brand",
+          icon: FileImage,
+          path: "/about-brand",
+        },
+      ],
     },
     {
       name: "Collections",
       icon: Boxes,
-      key: "collections", // tambahkan key unik
+      key: "collections",
       children: [
         {
           name: "Collections Categories",
@@ -73,6 +76,48 @@ export default function Sidebar() {
           path: "/collection-detail",
         },
       ],
+    },
+    {
+      name: "Company",
+      icon: Building2,
+      path: "/company",
+    },
+    {
+      name: "Contact",
+      icon: Phone,
+      path: "/contact",
+    },
+    {
+      name: "Dealer",
+      icon: MapPinned,
+      path: "/dealer",
+    },
+    {
+      name: "Dream Better",
+      icon: Sparkles,
+      key: "dream-better",
+      children: [
+        {
+          name: "Dream Better List",
+          icon: Sparkles,
+          path: "/dream-better",
+        },
+        {
+          name: "Dream Better Section",
+          icon: FileImage,
+          path: "/dream-better-section",
+        },
+      ],
+    },
+    {
+      name: "Exhibition",
+      icon: CalendarDays,
+      path: "/exhibition",
+    },
+    {
+      name: "Hero",
+      icon: Image,
+      path: "/hero",
     },
     {
       name: "Products",
@@ -112,38 +157,6 @@ export default function Sidebar() {
       path: "/technology",
     },
     {
-      name: "Dream Better",
-      icon: Sparkles,
-      key: "dream-better",
-      children: [
-        {
-          name: "Dream Better List",
-          icon: Sparkles,
-          path: "/dream-better",
-        },
-        {
-          name: "Dream Better Section",
-          icon: FileImage,
-          path: "/dream-better-section",
-        }
-      ],
-    },
-    {
-      name: "Exhibition",
-      icon: CalendarDays,
-      path: "/exhibition",
-    },
-    {
-      name: "Dealer",
-      icon: MapPinned,
-      path: "/dealer",
-    },
-    {
-      name: "Contact",
-      icon: Phone,
-      path: "/contact",
-    },
-    {
       name: "Testimonial",
       icon: MessageSquare,
       path: "/testimonial",
@@ -157,7 +170,10 @@ export default function Sidebar() {
 
   return (
     <aside className="flex h-screen w-72 flex-col bg-[#2A2010] text-white">
-      <div className="border-b border-white/10 p-8">
+      <button
+        onClick={() => navigate("/dashboard")}
+        className="border-b border-white/10 p-8 text-left transition hover:bg-white/5"
+      >
         <h1
           className="text-4xl"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -165,14 +181,14 @@ export default function Sidebar() {
           BigKoil
         </h1>
         <p className="mt-2 text-sm text-white/60">Admin Dashboard</p>
-      </div>
+      </button>
 
       <nav className="min-h-0 flex-1 overflow-y-auto px-4 py-6">
         {menus.map((menu) => {
           const Icon = menu.icon;
 
           if (menu.children) {
-            const isOpen = openMenus[menu.key]; // status per-menu, bukan shared
+            const isOpen = openMenus[menu.key];
 
             return (
               <div key={menu.name} className="mb-2">
@@ -202,7 +218,8 @@ export default function Sidebar() {
                           key={child.path}
                           to={child.path}
                           className={({ isActive }) =>
-                            `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
+                            `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${
+                              isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
                             }`
                           }
                         >
@@ -222,7 +239,8 @@ export default function Sidebar() {
               key={menu.path}
               to={menu.path}
               className={({ isActive }) =>
-                `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 transition ${isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
+                `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 transition ${
+                  isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
                 }`
               }
             >
