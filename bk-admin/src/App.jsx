@@ -23,6 +23,7 @@ import TechnologyPage from "./modules/technology/TechnologyPage";
 import DreamBetterPage from "./modules/dream-better/DreamBetterPage";
 import DreamBetterSectionPage from "./modules/dream-better-section/DreamBetterSectionPage";
 import ExhibitionPage from "./modules/exhibition/ExhibitionPage"
+import DealerPage from "./modules/dealer/DealerPage"
 
 function App() {
   return (
@@ -87,6 +88,8 @@ function App() {
           <Route path="/dream-better-section" element={<DreamBetterSectionPage />}/>
 
           <Route path="/exhibition" element={<ExhibitionPage />}/>
+
+          <Route path="dealer" element={<DealerPage />}/>
         </Route>
 
       </Routes>
