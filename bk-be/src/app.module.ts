@@ -23,6 +23,7 @@ import { ProductTechnologyModule } from './modules/product-technology/product-te
 import { CollectionDetailModule } from './modules/collection-detail/collection-detail.module';
 import { ExhibitionModule } from './modules/exhibition/exhibition.module';
 import { DreamBetterSectionModule } from './modules/dream-better-section/dream-better-section.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 @Module({
   imports: [
     PrismaModule,
@@ -47,6 +48,7 @@ import { DreamBetterSectionModule } from './modules/dream-better-section/dream-b
     CollectionDetailModule,
     ExhibitionModule,
     DreamBetterSectionModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

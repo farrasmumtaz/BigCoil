@@ -9,7 +9,7 @@ export default function Header() {
         </h2>
 
         <p className="text-sm text-gray-500">
-          Welcome back 👋
+          Manage all BigKoil website content from one place.
         </p>
       </div>
 
