@@ -25,7 +25,7 @@ import DreamBetterSectionPage from "./modules/dream-better-section/DreamBetterSe
 import ExhibitionPage from "./modules/exhibition/ExhibitionPage"
 import DealerPage from "./modules/dealer/DealerPage"
 import ContactPage from "./modules/contact/ContactPage"
-
+import TestimonialPage from "./modules/testimonial/TestimonialPage";
 function App() {
   return (
     <BrowserRouter>
@@ -93,6 +93,8 @@ function App() {
           <Route path="dealer" element={<DealerPage />}/>
 
           <Route path="contact" element={<ContactPage />}/>
+
+          <Route path="testimonial" element={<TestimonialPage />}/>
         </Route>
 
       </Routes>
