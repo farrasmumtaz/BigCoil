@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-import DreamBetterSectionService from "./dreamBetterSection.service";
+import {DreamBetterSectionService} from "./dreamBetterSection.service";
 
 export default function DreamBetterSectionTable({
   sections,

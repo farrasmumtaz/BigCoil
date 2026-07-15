@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import DreamBetterService from "../dream-better/dreamBetter.service";
-import DreamBetterSectionService from "./dreamBetterSection.service";
+import {DreamBetterSectionService} from "./dreamBetterSection.service";
 
 const initialForm = {
   dreamBetterId: "",

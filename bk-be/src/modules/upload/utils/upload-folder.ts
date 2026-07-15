@@ -19,6 +19,8 @@ export const uploadFolders = {
 
   dealer: 'dealer',
 
+  exhibition: 'exhibition',
+
   'dream-better': 'dream-better',
 
   'about-company': 'about-company',

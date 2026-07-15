@@ -8,7 +8,7 @@ const DreamBetterSectionService = {
     getOne(id) {
         return api.get(`/dream-better-section/dream-better/${id}`).then((res) => res.data);
     },
-    
+
     create(data) {
         return api.post("/dream-better-section", data).then((res) => res.data);
     },
@@ -31,3 +31,5 @@ const DreamBetterSectionService = {
             .then((res) => res.data);
     },
 }
+
+export { DreamBetterSectionService };

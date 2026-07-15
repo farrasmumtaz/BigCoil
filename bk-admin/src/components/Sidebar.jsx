@@ -156,7 +156,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex w-72 flex-col bg-[#2A2010] text-white">
+    <aside className="flex h-screen w-72 flex-col bg-[#2A2010] text-white">
       <div className="border-b border-white/10 p-8">
         <h1
           className="text-4xl"
@@ -167,7 +167,7 @@ export default function Sidebar() {
         <p className="mt-2 text-sm text-white/60">Admin Dashboard</p>
       </div>
 
-      <nav className="flex-1 overflow-y-auto px-4 py-6">
+      <nav className="min-h-0 flex-1 overflow-y-auto px-4 py-6">
         {menus.map((menu) => {
           const Icon = menu.icon;
 
@@ -202,8 +202,7 @@ export default function Sidebar() {
                           key={child.path}
                           to={child.path}
                           className={({ isActive }) =>
-                            `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${
-                              isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
+                            `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
                             }`
                           }
                         >
@@ -223,8 +222,7 @@ export default function Sidebar() {
               key={menu.path}
               to={menu.path}
               className={({ isActive }) =>
-                `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 transition ${
-                  isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
+                `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 transition ${isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
                 }`
               }
             >
@@ -233,17 +231,17 @@ export default function Sidebar() {
             </NavLink>
           );
         })}
-      </nav>
 
-      <div className="border-t border-white/10 p-4">
-        <button
-          onClick={logout}
-          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-red-500"
-        >
-          <LogOut size={20} />
-          Logout
-        </button>
-      </div>
+        <div className="border-t border-white/10 p-4">
+          <button
+            onClick={logout}
+            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 transition hover:bg-red-500"
+          >
+            <LogOut size={20} />
+            Logout
+          </button>
+        </div>
+      </nav>
     </aside>
   );
 }

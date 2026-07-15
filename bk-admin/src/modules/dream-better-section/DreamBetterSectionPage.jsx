@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import DreamBetterSectionForm from "./DreamBetterSectionForm";
 import DreamBetterSectionTable from "./DreamBetterSectionTable";
 
-import DreamBetterSectionService from "./dreamBetterSection.service";
+import {DreamBetterSectionService} from "./dreamBetterSection.service";
 
 export default function DreamBetterSectionPage() {
   const [sections, setSections] = useState([]);
