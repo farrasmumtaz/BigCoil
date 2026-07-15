@@ -10,27 +10,19 @@ const DreamBetterService = {
   },
 
   getBySlug(slug) {
-    return api
-      .get(`/dream-better/slug/${slug}`)
-      .then((res) => res.data);
+    return api.get(`/dream-better/slug/${slug}`).then((res) => res.data);
   },
 
   create(data) {
-    return api
-      .post("/dream-better", data)
-      .then((res) => res.data);
+    return api.post("/dream-better", data).then((res) => res.data);
   },
 
   update(id, data) {
-    return api
-      .patch(`/dream-better/${id}`, data)
-      .then((res) => res.data);
+    return api.patch(`/dream-better/${id}`, data).then((res) => res.data);
   },
 
   remove(id) {
-    return api
-      .delete(`/dream-better/${id}`)
-      .then((res) => res.data);
+    return api.delete(`/dream-better/${id}`).then((res) => res.data);
   },
 
   uploadImage(file) {
