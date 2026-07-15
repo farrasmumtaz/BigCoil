@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import ContactTable from "./ContactTable";
 import ContactDetailModal from "./ContactDetailModal";
 
@@ -23,7 +23,7 @@ export default function ContactPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal mengambil data.");
+      toast.error("Gagal mengambil data.");
     } finally {
       setLoading(false);
     }
@@ -47,7 +47,7 @@ export default function ContactPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal menghapus pesan.");
+      toast.error("Gagal menghapus pesan.");
     }
   };
 

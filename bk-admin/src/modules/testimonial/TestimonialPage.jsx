@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import TestimonialForm from "./TestimonialForm";
 import TestimonialTable from "./TestimonialTable";
 
@@ -24,7 +24,7 @@ export default function TestimonialPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal mengambil data testimonial.");
+      toast.error("Gagal mengambil data testimonial.");
     } finally {
       setLoading(false);
     }
@@ -54,7 +54,7 @@ export default function TestimonialPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal menghapus testimonial.");
+      toast.error("Gagal menghapus testimonial.");
     }
   };
 
