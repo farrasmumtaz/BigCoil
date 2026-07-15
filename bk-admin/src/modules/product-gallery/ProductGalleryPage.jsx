@@ -4,6 +4,7 @@ import ProductGalleryForm from "./ProductGalleryForm";
 import ProductGalleryTable from "./ProductGalleryTable";
 
 import ProductGalleryService from "./productGallery.service";
+import toast from "react-hot-toast";
 
 export default function ProductGalleryPage() {
     const [galleries, setGalleries] = useState([]);
@@ -22,7 +23,7 @@ export default function ProductGalleryPage() {
         } catch (err) {
             console.error(err);
 
-            alert("Gagal mengambil gallery.");
+            toast.error("Gagal mengambil gallery.");
         } finally {
             setLoading(false);
         }

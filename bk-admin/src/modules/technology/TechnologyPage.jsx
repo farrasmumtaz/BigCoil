@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import TechnologyForm from "./TechnologyForm";
 import TechnologyTable from "./TechnologyTable";
 
@@ -22,7 +22,7 @@ export default function TechnologyPage() {
         } catch (err) {
             console.error(err);
 
-            alert("Gagal mengambil data technology.");
+            toast.error("Gagal mengambil data technology.");
         } finally {
             setLoading(false);
         }
@@ -52,7 +52,7 @@ export default function TechnologyPage() {
         } catch (err) {
             console.error(err);
 
-            alert("Gagal menghapus technology.");
+            toast.error("Gagal menghapus technology.");
         }
     };
 

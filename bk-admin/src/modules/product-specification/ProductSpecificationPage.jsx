@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import ProductSpecificationForm from "./ProductSpecificationForm";
 import ProductSpecificationTable from "./ProductSpecificationTable";
 
@@ -23,7 +23,7 @@ export default function ProductSpecificationPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal mengambil Product Specification.");
+      toast.error("Gagal mengambil Product Specification.");
     } finally {
       setLoading(false);
     }

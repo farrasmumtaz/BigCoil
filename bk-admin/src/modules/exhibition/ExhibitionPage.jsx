@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import ExhibitionForm from "./ExhibitionForm";
 import ExhibitionTable from "./ExhibitionTable";
 
@@ -24,7 +24,7 @@ export default function ExhibitionPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal mengambil data exhibition.");
+      toast.error("Gagal mengambil data exhibition.");
     } finally {
       setLoading(false);
     }
@@ -54,7 +54,7 @@ export default function ExhibitionPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal menghapus exhibition.");
+      toast.error("Gagal menghapus exhibition.");
     }
   };
 

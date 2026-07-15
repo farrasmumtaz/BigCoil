@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import DreamBetterForm from "./DreamBetterForm";
 import DreamBetterTable from "./DreamBetterTable";
 
@@ -22,7 +22,7 @@ export default function DreamBetterPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal mengambil data Dream Better.");
+      toast.error("Gagal mengambil data Dream Better.");
     } finally {
       setLoading(false);
     }
@@ -52,7 +52,7 @@ export default function DreamBetterPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal menghapus Dream Better.");
+      toast.error("Gagal menghapus Dream Better.");
     }
   };
 

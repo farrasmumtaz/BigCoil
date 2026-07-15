@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import DreamBetterSectionForm from "./DreamBetterSectionForm";
 import DreamBetterSectionTable from "./DreamBetterSectionTable";
 
@@ -22,9 +22,7 @@ export default function DreamBetterSectionPage() {
     } catch (err) {
       console.error(err);
 
-      alert(
-        "Gagal mengambil data Dream Better Section."
-      );
+      toast.error("Gagal mengambil data Dream Better Section.");
     } finally {
       setLoading(false);
     }

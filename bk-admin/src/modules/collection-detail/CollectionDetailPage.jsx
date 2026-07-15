@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import CollectionDetailForm from "./CollectionDetailForm";
 import CollectionDetailTable from "./CollectionDetailTable";
 
@@ -20,7 +20,7 @@ export default function CollectionDetailPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal mengambil data Collection Detail.");
+      toast.error("Gagal mengambil data Collection Detail.");
     } finally {
       setLoading(false);
     }
@@ -50,7 +50,7 @@ export default function CollectionDetailPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal menghapus Collection Detail.");
+      toast.error("Gagal menghapus Collection Detail.");
     }
   };
 

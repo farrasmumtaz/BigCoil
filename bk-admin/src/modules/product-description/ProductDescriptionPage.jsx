@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import ProductDescriptionForm from "./ProductDescriptionForm";
 import ProductDescriptionTable from "./ProductDescriptionTable";
 
@@ -23,7 +23,7 @@ export default function ProductDescriptionPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal mengambil Product Description.");
+      toast.error("Gagal mengambil Product Description.");
     } finally {
       setLoading(false);
     }

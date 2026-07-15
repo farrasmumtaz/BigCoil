@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 import HeroService from "./hero.service";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -58,13 +58,13 @@ export default function HeroForm({
         image: imageUrl,
       });
 
-      alert("Hero berhasil diperbarui.");
+      toast.error("Hero berhasil diperbarui.");
 
       onSuccess();
     } catch (err) {
       console.error(err);
 
-      alert("Gagal menyimpan.");
+      toast.error("Gagal menyimpan.");
     } finally {
       setSaving(false);
     }

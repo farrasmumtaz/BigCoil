@@ -4,6 +4,7 @@ import DealerForm from "./DealerForm";
 import DealerTable from "./DealerTable";
 
 import DealerService from "./dealer.service";
+import toast from "react-hot-toast";
 
 export default function DealerPage() {
   const [dealers, setDealers] =
@@ -24,7 +25,7 @@ export default function DealerPage() {
     } catch (err) {
       console.error(err);
 
-      alert("Gagal mengambil data dealer.");
+      toast.error("Gagal mengambil data dealer.");
     } finally {
       setLoading(false);
     }

@@ -111,9 +111,7 @@ export default function ExhibitionForm({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menyimpan Exhibition."
-      );
+      toast.error("Gagal menyimpan Exhibition.");
     } finally {
       setSaving(false);
     }
