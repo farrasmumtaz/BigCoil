@@ -9,30 +9,6 @@ export default function ExhibitionTable({
   onEdit,
   onDelete,
 }) {
-  const remove = async (id) => {
-    const ok = window.confirm(
-      "Yakin ingin menghapus exhibition ini?"
-    );
-
-    if (!ok) return;
-
-    try {
-      await ExhibitionService.remove(id);
-
-      toast.success(
-        "Exhibition berhasil dihapus."
-      );
-
-      onDelete(id);
-    } catch (err) {
-      console.error(err);
-
-      toast.error(
-        "Gagal menghapus exhibition."
-      );
-    }
-  };
-
   return (
     <div className="overflow-hidden rounded-xl bg-white shadow">
       <table className="w-full">
@@ -130,9 +106,7 @@ export default function ExhibitionTable({
                 </button>
 
                 <button
-                  onClick={() =>
-                    remove(item.id)
-                  }
+                  onClick={() => onDelete(item.id)}
                   className="rounded-lg bg-red-600 px-4 py-2 text-white transition hover:bg-red-700"
                 >
                   Delete

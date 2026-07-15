@@ -23,7 +23,6 @@ export default function CollectionTable({
     } catch (err) {
       console.error(err);
 
-      toast.error("Gagal menghapus collection.");
     }
   };
 

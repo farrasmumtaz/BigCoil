@@ -22,10 +22,6 @@ export default function AboutCompanyTable({
       );
     } catch (err) {
       console.error(err);
-
-      toast.error(
-        "Gagal menghapus About Company."
-      );
     }
   };
 

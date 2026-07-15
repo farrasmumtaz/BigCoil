@@ -23,7 +23,6 @@ export default function DreamBetterSectionTable({
     } catch (err) {
       console.error(err);
 
-      toast.error("Gagal menghapus section.");
     }
   };
 

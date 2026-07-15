@@ -58,13 +58,13 @@ export default function Footer() {
 
             <ul className="flex flex-col gap-3 text-sm text-stone-600">
               <li>
-                <a href="#retail" className="hover:text-black">
+                <a href="collection/retail" className="hover:text-black">
                   Retail
                 </a>
               </li>
 
               <li>
-                <a href="#hospitality" className="hover:text-black">
+                <a href="collection/hospitality" className="hover:text-black">
                   Hospitality
                 </a>
               </li>
@@ -79,15 +79,15 @@ export default function Footer() {
 
             <ul className="flex flex-col gap-3 text-sm text-stone-600">
               <li>
-                <a href="#about">Tentang Kami</a>
+                <a href="about">Tentang Kami</a>
               </li>
 
               <li>
-                <a href="#exhibition">Pameran</a>
+                <a href="exhibition">Pameran</a>
               </li>
 
               <li>
-                <a href="#warranty">Garansi</a>
+                <a href="warranty">Garansi</a>
               </li>
 
               <li>

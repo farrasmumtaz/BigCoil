@@ -25,7 +25,6 @@ export default function ProductTable({
     } catch (err) {
       console.error(err);
 
-      toast.error("Gagal menghapus Product.");
     }
   };
 

@@ -51,9 +51,13 @@ export default function DealerPage() {
     try {
       await DealerService.remove(id);
 
+      toast.success("Dealer berhasil dihapus.");
+
       fetchDealers();
     } catch (err) {
       console.error(err);
+
+      toast.error("Gagal menghapus dealer.");
     }
   };
 

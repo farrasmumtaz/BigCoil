@@ -47,12 +47,11 @@ export default function TechnologyPage() {
 
         try {
             await TechnologyService.remove(id);
-
+            toast.success("Technology Better berhasil dihapus.");
             fetchTechnologies();
         } catch (err) {
             console.error(err);
-
-            toast.error("Gagal menghapus technology.");
+            toast.error("Gagal menghapus Technology.");
         }
     };
 

@@ -17,6 +17,7 @@ import {
   ChevronRight,
   FolderTree,
   FileImage,
+  Info,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -40,7 +41,7 @@ export default function Sidebar() {
   const menus = [
     {
       name: "About",
-      icon: Building2,
+      icon: Info,
       key: "about",
       children: [
         {

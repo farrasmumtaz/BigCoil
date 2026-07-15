@@ -27,9 +27,6 @@ export default function ProductSpecificationTable({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menghapus specification."
-      );
     }
   };
 

@@ -49,8 +49,6 @@ export default function CollectionDetailPage() {
       fetchDetails();
     } catch (err) {
       console.error(err);
-
-      toast.error("Gagal menghapus Collection Detail.");
     }
   };
 

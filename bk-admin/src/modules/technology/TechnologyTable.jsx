@@ -9,30 +9,6 @@ export default function TechnologyTable({
   onEdit,
   onDelete,
 }) {
-  const remove = async (id) => {
-    const ok = window.confirm(
-      "Yakin ingin menghapus technology ini?"
-    );
-
-    if (!ok) return;
-
-    try {
-      await TechnologyService.remove(id);
-
-      toast.success(
-        "Technology berhasil dihapus."
-      );
-
-      onDelete(id);
-    } catch (err) {
-      console.error(err);
-
-      toast.error(
-        "Gagal menghapus technology."
-      );
-    }
-  };
-
   return (
     <div className="overflow-hidden rounded-xl bg-white shadow">
 
@@ -134,7 +110,7 @@ export default function TechnologyTable({
                 </button>
 
                 <button
-                  onClick={() => remove(item.id)}
+                  onClick={() => onDelete(item.id)}
                   className="rounded-lg bg-red-600 px-4 py-2 text-white transition hover:bg-red-700"
                 >
                   Delete

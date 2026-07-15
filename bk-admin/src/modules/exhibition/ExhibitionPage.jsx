@@ -49,12 +49,16 @@ export default function ExhibitionPage() {
 
     try {
       await ExhibitionService.remove(id);
+      toast.success(
+        "Dealer berhasil dihapus."
+      );
 
       fetchExhibitions();
     } catch (err) {
       console.error(err);
-
-      toast.error("Gagal menghapus exhibition.");
+      toast.error(
+        "Gagal menghapus Dealer."
+      );
     }
   };
 

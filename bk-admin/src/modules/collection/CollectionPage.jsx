@@ -51,8 +51,6 @@ export default function CollectionPage() {
             fetchCollections();
         } catch (err) {
             console.error(err);
-
-            toast.error("Gagal menghapus collection.");
         }
     };
 

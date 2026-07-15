@@ -39,22 +39,28 @@ export default function DreamBetterPage() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Yakin ingin menghapus Dream Better?"
+    const ok = window.confirm(
+      "Yakin ingin menghapus Dream Better ini?"
     );
 
-    if (!confirmDelete) return;
+    if (!ok) return;
 
     try {
       await DreamBetterService.remove(id);
+
+      toast.success(
+        "Dream Better berhasil dihapus."
+      );
 
       fetchDreamBetters();
     } catch (err) {
       console.error(err);
 
-      toast.error("Gagal menghapus Dream Better.");
+      toast.error(
+        "Gagal menghapus Dream Better."
+      );
     }
-  };
+  };;
 
   if (loading) {
     return <div>Loading...</div>;

@@ -25,7 +25,6 @@ export default function ProductGalleryTable({
     } catch (err) {
       console.error(err);
 
-      toast.error("Gagal menghapus gallery.");
     }
   };
 

@@ -25,9 +25,6 @@ export default function ProductTechnologyTable({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menghapus Product Technology."
-      );
     }
   };
 

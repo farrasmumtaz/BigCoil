@@ -9,30 +9,6 @@ export default function TestimonialTable({
   onEdit,
   onDelete,
 }) {
-  const remove = async (id) => {
-    const ok = window.confirm(
-      "Yakin ingin menghapus testimonial ini?"
-    );
-
-    if (!ok) return;
-
-    try {
-      await TestimonialService.remove(id);
-
-      toast.success(
-        "Testimonial berhasil dihapus."
-      );
-
-      onDelete(id);
-    } catch (err) {
-      console.error(err);
-
-      toast.error(
-        "Gagal menghapus testimonial."
-      );
-    }
-  };
-
   return (
     <div className="overflow-hidden rounded-xl bg-white shadow">
       <table className="w-full">
@@ -100,7 +76,7 @@ export default function TestimonialTable({
 
                 <button
                   onClick={() =>
-                    remove(item.id)
+                    onDelete(item.id)
                   }
                   className="rounded-lg bg-red-600 px-4 py-2 text-white"
                 >

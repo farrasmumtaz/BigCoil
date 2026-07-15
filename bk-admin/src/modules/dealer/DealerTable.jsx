@@ -1,68 +1,20 @@
-import toast from "react-hot-toast";
-
-import DealerService from "./dealer.service";
-
 export default function DealerTable({
   data,
   onEdit,
   onDelete,
 }) {
-  const remove = async (id) => {
-    const ok = window.confirm(
-      "Yakin ingin menghapus dealer ini?"
-    );
-
-    if (!ok) return;
-
-    try {
-      await DealerService.remove(id);
-
-      toast.success(
-        "Dealer berhasil dihapus."
-      );
-
-      onDelete(id);
-    } catch (err) {
-      console.error(err);
-
-      toast.error(
-        "Gagal menghapus dealer."
-      );
-    }
-  };
-
   return (
     <div className="overflow-hidden rounded-xl bg-white shadow">
       <table className="w-full">
         <thead className="bg-gray-100">
           <tr>
-            <th className="p-3 text-left">
-              Name
-            </th>
-
-            <th className="p-3 text-left">
-              Island
-            </th>
-
-            <th className="p-3 text-left">
-              Province
-            </th>
-
-            <th className="p-3 text-left">
-              City
-            </th>
-
-            <th className="p-3 text-left">
-              Phone
-            </th>
-
-            <th className="p-3 text-left">
-              Address
-            </th>
-
-            <th className="p-3 text-center">
-              Action
-            </th>
+            <th className="p-3 text-left">Name</th>
+            <th className="p-3 text-left">Island</th>
+            <th className="p-3 text-left">Province</th>
+            <th className="p-3 text-left">City</th>
+            <th className="p-3 text-left">Phone</th>
+            <th className="p-3 text-left">Address</th>
+            <th className="p-3 text-center">Action</th>
           </tr>
         </thead>
 
@@ -129,7 +81,7 @@ export default function DealerTable({
                 </button>
 
                 <button
-                  onClick={() => remove(item.id)}
+                  onClick={() => onDelete(item.id)}
                   className="rounded-lg bg-red-600 px-4 py-2 text-white transition hover:bg-red-700"
                 >
                   Delete

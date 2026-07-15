@@ -75,7 +75,7 @@ export default function CompanyForm({
         payload,
       );
 
-      toast.error("Company berhasil diperbarui.");
+      toast.success("Company berhasil diperbarui.");
 
       onSuccess();
     } catch (err) {

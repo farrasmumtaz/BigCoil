@@ -25,9 +25,6 @@ export default function ProductDescriptionTable({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menghapus description."
-      );
     }
   };
 

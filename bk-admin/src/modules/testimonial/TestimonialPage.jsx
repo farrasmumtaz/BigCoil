@@ -49,12 +49,11 @@ export default function TestimonialPage() {
 
     try {
       await TestimonialService.remove(id);
-
+      toast.success("Testimonial Berhasil Dihapus")
       fetchTestimonials();
     } catch (err) {
       console.error(err);
-
-      toast.error("Gagal menghapus testimonial.");
+      toast.error("Gagal Menghapus Testimonial")
     }
   };
 

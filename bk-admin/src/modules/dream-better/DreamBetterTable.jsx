@@ -9,30 +9,6 @@ export default function DreamBetterTable({
   onEdit,
   onDelete,
 }) {
-  const remove = async (id) => {
-    const ok = window.confirm(
-      "Yakin ingin menghapus Dream Better ini?"
-    );
-
-    if (!ok) return;
-
-    try {
-      await DreamBetterService.remove(id);
-
-      toast.success(
-        "Dream Better berhasil dihapus."
-      );
-
-      onDelete(id);
-    } catch (err) {
-      console.error(err);
-
-      toast.error(
-        "Gagal menghapus Dream Better."
-      );
-    }
-  };
-
   return (
     <div className="overflow-hidden rounded-xl bg-white shadow">
       <table className="w-full">
@@ -118,7 +94,7 @@ export default function DreamBetterTable({
                 </button>
 
                 <button
-                  onClick={() => remove(item.id)}
+                  onClick={() => onDelete(item.id)}
                   className="rounded-lg bg-red-600 px-4 py-2 text-white transition hover:bg-red-700"
                 >
                   Delete

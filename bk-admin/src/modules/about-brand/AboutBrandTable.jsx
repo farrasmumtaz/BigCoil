@@ -22,10 +22,6 @@ export default function AboutBrandTable({
       );
     } catch (err) {
       console.error(err);
-
-      toast.error(
-        "Gagal menghapus About Brand."
-      );
     }
   };
 

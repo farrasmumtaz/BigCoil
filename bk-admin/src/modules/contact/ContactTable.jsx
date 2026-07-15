@@ -1,60 +1,14 @@
-import toast from "react-hot-toast";
-
-import ContactService from "./contact.service";
-
-export default function ContactTable({
-  data,
-  onView,
-  onDelete,
-}) {
-  const remove = async (id) => {
-    const ok = window.confirm(
-      "Yakin ingin menghapus pesan ini?"
-    );
-
-    if (!ok) return;
-
-    try {
-      await ContactService.remove(id);
-
-      toast.success(
-        "Pesan berhasil dihapus."
-      );
-
-      onDelete(id);
-    } catch (err) {
-      console.error(err);
-
-      toast.error(
-        "Gagal menghapus pesan."
-      );
-    }
-  };
-
+export default function ContactTable({ data, onView, onDelete }) {
   return (
     <div className="overflow-hidden rounded-xl bg-white shadow">
       <table className="w-full">
         <thead className="bg-gray-100">
           <tr>
-            <th className="p-4 text-left">
-              Name
-            </th>
-
-            <th className="p-4 text-left">
-              Email
-            </th>
-
-            <th className="p-4 text-left">
-              Phone
-            </th>
-
-            <th className="p-4 text-left">
-              Date
-            </th>
-
-            <th className="p-4 text-center">
-              Action
-            </th>
+            <th className="p-4 text-left">Name</th>
+            <th className="p-4 text-left">Email</th>
+            <th className="p-4 text-left">Phone</th>
+            <th className="p-4 text-left">Date</th>
+            <th className="p-4 text-center">Action</th>
           </tr>
         </thead>
 
@@ -71,26 +25,12 @@ export default function ContactTable({
           )}
 
           {data.map((item) => (
-            <tr
-              key={item.id}
-              className="border-t"
-            >
-              <td className="p-4 font-semibold">
-                {item.name}
-              </td>
-
-              <td className="p-4">
-                {item.email}
-              </td>
-
-              <td className="p-4">
-                {item.phone || "-"}
-              </td>
-
+            <tr key={item.id} className="border-t">
+              <td className="p-4 font-semibold">{item.name}</td>
+              <td className="p-4">{item.email}</td>
+              <td className="p-4">{item.phone || "-"}</td>
               <td className="p-4 whitespace-nowrap">
-                {new Date(
-                  item.createdAt
-                ).toLocaleDateString("id-ID", {
+                {new Date(item.createdAt).toLocaleDateString("id-ID", {
                   day: "2-digit",
                   month: "long",
                   year: "numeric",
@@ -99,6 +39,7 @@ export default function ContactTable({
 
               <td className="space-x-2 p-4 text-center">
                 <button
+                  type="button"
                   onClick={() => onView(item)}
                   className="rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
                 >
@@ -106,7 +47,8 @@ export default function ContactTable({
                 </button>
 
                 <button
-                  onClick={() => remove(item.id)}
+                  type="button"
+                  onClick={() => onDelete(item.id)}
                   className="rounded-lg bg-red-600 px-4 py-2 text-white transition hover:bg-red-700"
                 >
                   Delete
