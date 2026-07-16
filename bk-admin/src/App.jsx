@@ -29,6 +29,7 @@ import TestimonialPage from "./modules/testimonial/TestimonialPage";
 import AboutBrandPage from "./modules/about-brand/AboutBrandPage"
 import AboutCompanyPage from "./modules/about-company/AboutCompanyPage";
 import ServiceCenterPage from "./modules/service-center/ServiceCenterPage";
+import ServiceSettingPage from "./modules/service-setting/ServiceSettingPage";
 
 function App() {
   return (
@@ -105,6 +106,8 @@ function App() {
           <Route path="about-brand" element={<AboutBrandPage />}/>
 
           <Route path="/service-center" element={<ServiceCenterPage />}/>
+          
+          <Route path="/service-setting" element={<ServiceSettingPage />}/>
         </Route>
 
       </Routes>
