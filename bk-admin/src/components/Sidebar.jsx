@@ -18,6 +18,7 @@ import {
   FolderTree,
   FileImage,
   Info,
+  Wrench,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -28,6 +29,7 @@ export default function Sidebar() {
     collections: false,
     products: false,
     "dream-better": false,
+    service: false,
   });
 
   const toggleMenu = (key) => {
@@ -37,7 +39,6 @@ export default function Sidebar() {
     }));
   };
 
-  // sudah diurutkan alfabetis berdasarkan "name", Dashboard dihapus
   const menus = [
     {
       name: "About",
@@ -153,6 +154,23 @@ export default function Sidebar() {
       ],
     },
     {
+      name: "Service",
+      icon: Wrench,
+      key: "service",
+      children: [
+        {
+          name: "Service Center",
+          icon: MapPinned,
+          path: "/service-center",
+        },
+        {
+          name: "Service Setting",
+          icon: FileImage,
+          path: "/service-setting",
+        },
+      ],
+    },
+    {
       name: "Technology",
       icon: Cpu,
       path: "/technology",
@@ -219,8 +237,7 @@ export default function Sidebar() {
                           key={child.path}
                           to={child.path}
                           className={({ isActive }) =>
-                            `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${
-                              isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
+                            `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
                             }`
                           }
                         >
@@ -240,8 +257,7 @@ export default function Sidebar() {
               key={menu.path}
               to={menu.path}
               className={({ isActive }) =>
-                `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 transition ${
-                  isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
+                `mb-2 flex items-center gap-3 rounded-xl px-4 py-3 transition ${isActive ? "bg-[#B8935F]" : "hover:bg-white/10"
                 }`
               }
             >

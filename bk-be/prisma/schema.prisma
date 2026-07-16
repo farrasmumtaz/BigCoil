@@ -350,3 +350,32 @@ model Exhibition {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model ServiceCenter {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  island String
+
+  province String
+
+  city String
+
+  address String @db.Text
+
+  phone String?
+
+  mapsUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ServiceSetting {
+  id Int @id @default(1)
+
+  embedUrl String @db.Text
+
+  updatedAt DateTime @updatedAt
+}

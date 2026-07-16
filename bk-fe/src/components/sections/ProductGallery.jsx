@@ -32,7 +32,7 @@ export default function ProductGallery({ galleries }) {
               <img
                 src={`${API_URL}${image.image}`}
                 alt=""
-                className="aspect-[3/4] w-full object-cover transition duration-500 hover:scale-105"
+                className="aspect-3/4 w-full object-cover transition duration-500 hover:scale-105"
               />
             </div>
           ))}

@@ -91,7 +91,7 @@ export default function Footer() {
               </li>
 
               <li>
-                <a href="#service">Pusat Layanan</a>
+                <a href="service">Pusat Layanan</a>
               </li>
             </ul>
           </div>

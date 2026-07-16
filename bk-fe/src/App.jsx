@@ -11,6 +11,8 @@ import ContactPage from "./contact/page";
 import ExhibitionPage from "./exhibition/page";
 import DreamBetterPage from "./dream-better/page";
 import DreamBetterDetailPage from "./dream-better-detail/page";
+import ServicePage from "./service/page"
+
 function App() {
   return (
       <Routes>
@@ -35,6 +37,8 @@ function App() {
         <Route path="/dream-better" element={<DreamBetterPage />}/>
 
         <Route path="/dream-better/:slug" element={<DreamBetterDetailPage />}/>
+
+        <Route path="/service" element={<ServicePage />}/>
       </Routes>
   );
 }

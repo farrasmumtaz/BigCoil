@@ -24,6 +24,8 @@ import { CollectionDetailModule } from './modules/collection-detail/collection-d
 import { ExhibitionModule } from './modules/exhibition/exhibition.module';
 import { DreamBetterSectionModule } from './modules/dream-better-section/dream-better-section.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { ServiceCenterModule } from './modules/service-center/service-center.module';
+import { ServiceSettingModule } from './modules/service-setting/service-setting.module';
 @Module({
   imports: [
     PrismaModule,
@@ -49,6 +51,8 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     ExhibitionModule,
     DreamBetterSectionModule,
     DashboardModule,
+    ServiceCenterModule,
+    ServiceSettingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
