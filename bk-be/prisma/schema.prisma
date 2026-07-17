@@ -33,6 +33,8 @@ model Company {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("company")
 }
 
 model Hero {
@@ -48,6 +50,8 @@ model Hero {
   image String
 
   updatedAt DateTime @updatedAt
+
+  @@map("hero")
 }
 
 model CollectionCategory {
@@ -60,6 +64,8 @@ model CollectionCategory {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("collectioncategory")
 }
 
 model Collection {
@@ -82,6 +88,8 @@ model Collection {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("collection")
 }
 
 model CollectionDetail {
@@ -99,6 +107,8 @@ model CollectionDetail {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("collectiondetail")
 }
 
 model Product {
@@ -127,6 +137,8 @@ model Product {
 
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
+
+  @@map("product")
 }
 
 model ProductGallery {
@@ -142,6 +154,8 @@ model ProductGallery {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("productgallery")
 }
 
 model ProductSpecification {
@@ -161,6 +175,8 @@ model ProductSpecification {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("productspecification")
 }
 
 model ProductDescription {
@@ -178,6 +194,8 @@ model ProductDescription {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("productdescription")
 }
 
 enum TechnologyType {
@@ -202,6 +220,8 @@ model Technology {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("technology")
 }
 
 model ProductTechnology {
@@ -218,6 +238,8 @@ model ProductTechnology {
   sortOrder Int @default(0)
 
   @@unique([productId, technologyId])
+
+  @@map("producttechnology")
 }
 
 model DreamBetter {
@@ -235,6 +257,8 @@ model DreamBetter {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("dreambetter")
 }
 
 model DreamBetterSection {
@@ -249,6 +273,8 @@ model DreamBetterSection {
   order Int
 
   dreamBetter DreamBetter@relation(fields: [dreamBetterId], references: [id], onDelete: Cascade)
+
+  @@map("dreambettersection")
 }
 
 model Testimonial {
@@ -258,6 +284,8 @@ model Testimonial {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("testimonial")
 }
 
 model Dealer {
@@ -279,6 +307,8 @@ model Dealer {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("dealer")
 }
 
 model ContactMessage {
@@ -293,6 +323,8 @@ model ContactMessage {
   message String @db.Text
 
   createdAt DateTime @default(now())
+
+  @@map("contactmessage")
 }
 
 model Admin {
@@ -303,6 +335,8 @@ model Admin {
   password String
 
   createdAt DateTime @default(now())
+
+  @@map("admin")
 }
 
 model AboutCompany {
@@ -318,6 +352,8 @@ model AboutCompany {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("aboutcompany")
 }
 
 model AboutBrand {
@@ -331,6 +367,8 @@ model AboutBrand {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("aboutbrand")
 }
 
 model Exhibition {
@@ -349,6 +387,8 @@ model Exhibition {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("exhibition")
 }
 
 model ServiceCenter {
@@ -370,6 +410,8 @@ model ServiceCenter {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("servicecenter")
 }
 
 model ServiceSetting {
@@ -378,4 +420,6 @@ model ServiceSetting {
   embedUrl String @db.Text
 
   updatedAt DateTime @updatedAt
+
+  @@map("servicesetting")
 }
