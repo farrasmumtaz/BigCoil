@@ -16,10 +16,7 @@ export default function AboutCompanyTable({
 
     try {
       await onDelete(id);
-
-      toast.success(
-        "About Company berhasil dihapus."
-      );
+      toast.success("About Company berhasil dihapus.");
     } catch (err) {
       console.error(err);
     }

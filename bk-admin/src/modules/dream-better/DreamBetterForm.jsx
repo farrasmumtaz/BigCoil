@@ -80,15 +80,11 @@ export default function DreamBetterForm({
           payload
         );
 
-        toast.success(
-          "Dream Better berhasil diperbarui."
-        );
+        toast.success("Dream Better berhasil diperbarui.");
       } else {
         await DreamBetterService.create(payload);
 
-        toast.success(
-          "Dream Better berhasil ditambahkan."
-        );
+        toast.success("Dream Better berhasil ditambahkan.");
       }
 
       setForm(initialForm);
@@ -98,9 +94,7 @@ export default function DreamBetterForm({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menyimpan Dream Better."
-      );
+      toast.error("Gagal menyimpan Dream Better.");
     } finally {
       setSaving(false);
     }

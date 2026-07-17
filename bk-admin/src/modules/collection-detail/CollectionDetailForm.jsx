@@ -106,17 +106,13 @@ export default function CollectionDetailForm({
           payload,
         );
 
-        toast.success(
-          "Collection Detail berhasil diperbarui."
-        );
+        toast.success("Collection Detail berhasil diperbarui.");
       } else {
         await CollectionDetailService.create(
           payload,
         );
 
-        toast.success(
-          "Collection Detail berhasil ditambahkan."
-        );
+        toast.success("Collection Detail berhasil ditambahkan.");
       }
 
       setForm(initialForm);
@@ -127,9 +123,7 @@ export default function CollectionDetailForm({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menyimpan Collection Detail."
-      );
+      toast.error("Gagal menyimpan Collection Detail.");
     } finally {
       setSaving(false);
     }

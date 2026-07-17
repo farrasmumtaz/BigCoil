@@ -82,15 +82,11 @@ export default function TechnologyForm({
           payload
         );
 
-        toast.success(
-          "Technology berhasil diperbarui."
-        );
+        toast.success("Technology berhasil diperbarui.");
       } else {
         await TechnologyService.create(payload);
 
-        toast.success(
-          "Technology berhasil ditambahkan."
-        );
+        toast.success("Technology berhasil ditambahkan.");
       }
 
       setForm(initialForm);
@@ -100,9 +96,7 @@ export default function TechnologyForm({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menyimpan Technology."
-      );
+      toast.error("Gagal menyimpan Technology.");
     } finally {
       setSaving(false);
     }

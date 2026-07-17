@@ -91,19 +91,13 @@ export default function ExhibitionForm({
           payload
         );
 
-        toast.success(
-          "Exhibition berhasil diperbarui."
-        );
+        toast.success("Exhibition berhasil diperbarui.");
       } else {
         await ExhibitionService.create(
           payload
         );
-
-        toast.success(
-          "Exhibition berhasil ditambahkan."
-        );
+        toast.success("Exhibition berhasil ditambahkan.");
       }
-
       setForm(initialForm);
       setImageFile(null);
 

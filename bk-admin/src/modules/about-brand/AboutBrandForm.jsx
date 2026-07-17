@@ -81,18 +81,12 @@ export default function AboutBrandForm({
           about.id,
           payload
         );
-
-        toast.success(
-          "About Brand berhasil diperbarui."
-        );
+        toast.success("About Brand berhasil diperbarui.");
       } else {
         await AboutBrandService.create(
           payload
         );
-
-        toast.success(
-          "About Brand berhasil ditambahkan."
-        );
+        toast.success("About Brand berhasil ditambahkan.");
       }
 
       setForm(initialForm);
@@ -101,10 +95,7 @@ export default function AboutBrandForm({
       onSuccess();
     } catch (err) {
       console.error(err);
-
-      toast.error(
-        "Gagal menyimpan About Brand."
-      );
+      toast.error("Gagal menyimpan About Brand.");
     } finally {
       setSaving(false);
     }
@@ -153,8 +144,8 @@ export default function AboutBrandForm({
               src={
                 imageFile
                   ? URL.createObjectURL(
-                      imageFile
-                    )
+                    imageFile
+                  )
                   : `${API_URL}${form.image}`
               }
               alt=""
@@ -176,8 +167,8 @@ export default function AboutBrandForm({
           {saving
             ? "Saving..."
             : about
-            ? "Update"
-            : "Create"}
+              ? "Update"
+              : "Create"}
         </button>
       </form>
     </div>

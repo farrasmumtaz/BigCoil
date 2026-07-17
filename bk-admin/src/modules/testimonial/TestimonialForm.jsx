@@ -71,17 +71,13 @@ export default function TestimonialForm({
           payload
         );
 
-        toast.success(
-          "Testimonial berhasil diperbarui."
-        );
+        toast.success("Testimonial berhasil diperbarui.");
       } else {
         await TestimonialService.create(
           payload
         );
 
-        toast.success(
-          "Testimonial berhasil ditambahkan."
-        );
+        toast.success("Testimonial berhasil ditambahkan.");
       }
 
       setForm(initialForm);
@@ -91,9 +87,7 @@ export default function TestimonialForm({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menyimpan testimonial."
-      );
+      toast.error("Gagal menyimpan testimonial.");
     } finally {
       setSaving(false);
     }

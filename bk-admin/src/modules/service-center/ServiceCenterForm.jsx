@@ -56,16 +56,11 @@ export default function ServiceCenterForm({
           serviceCenter.id,
           form,
         );
-
-        toast.success(
-          "Service Center berhasil diperbarui."
-        );
+        toast.success("Service Center berhasil diperbarui.");
       } else {
         await ServiceCenterService.create(form);
 
-        toast.success(
-          "Service Center berhasil ditambahkan."
-        );
+        toast.success("Service Center berhasil ditambahkan.");
       }
 
       setForm(initialForm);
@@ -74,9 +69,7 @@ export default function ServiceCenterForm({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menyimpan Service Center."
-      );
+      toast.error("Gagal menyimpan Service Center.");
     } finally {
       setSaving(false);
     }

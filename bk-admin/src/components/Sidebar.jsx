@@ -1,25 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-
-import {
-  Building2,
-  Image,
-  Boxes,
-  Package,
-  Cpu,
-  Sparkles,
-  CalendarDays,
-  MapPinned,
-  Phone,
-  MessageSquare,
-  LogOut,
-  ChevronDown,
-  ChevronRight,
-  FolderTree,
-  FileImage,
-  Info,
-  Wrench,
-} from "lucide-react";
+//import emoji
+import { Building2, Image, Boxes, Package, Cpu, Sparkles, CalendarDays, MapPinned, Phone, MessageSquare, LogOut, ChevronDown, ChevronRight, FolderTree, FileImage, Info, Wrench } from "lucide-react";
 
 export default function Sidebar() {
   const navigate = useNavigate();

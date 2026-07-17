@@ -17,9 +17,7 @@ export default function AboutBrandTable({
     try {
       await onDelete(id);
 
-      toast.success(
-        "About Brand berhasil dihapus."
-      );
+      toast.success("About Brand berhasil dihapus.");
     } catch (err) {
       console.error(err);
     }

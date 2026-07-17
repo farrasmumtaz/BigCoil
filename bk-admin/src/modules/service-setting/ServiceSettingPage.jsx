@@ -26,9 +26,7 @@ export default function ServiceSettingPage() {
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal mengambil Service Setting."
-      );
+      toast.error("Gagal mengambil Service Setting.");
     }
   };
 
@@ -51,16 +49,11 @@ export default function ServiceSettingPage() {
       await ServiceSettingService.update(
         form,
       );
-
-      toast.success(
-        "Google Maps berhasil diperbarui."
-      );
+      toast.success("Google Maps berhasil diperbarui.");
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal memperbarui Google Maps."
-      );
+      toast.error("Gagal memperbarui Google Maps.");
     } finally {
       setSaving(false);
     }

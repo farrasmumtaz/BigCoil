@@ -84,18 +84,12 @@ export default function AboutCompanyForm({
           about.id,
           payload
         );
-
-        toast.success(
-          "About Company berhasil diperbarui."
-        );
+        toast.success("About Company berhasil diperbarui.");
       } else {
         await AboutCompanyService.create(
           payload
         );
-
-        toast.success(
-          "About Company berhasil ditambahkan."
-        );
+        toast.success("About Company berhasil ditambahkan.");
       }
 
       setForm(initialForm);
@@ -105,9 +99,7 @@ export default function AboutCompanyForm({
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menyimpan About Company."
-      );
+      toast.error("Gagal menyimpan About Company.");
     } finally {
       setSaving(false);
     }

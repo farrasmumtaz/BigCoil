@@ -48,17 +48,13 @@ export default function DreamBetterPage() {
     try {
       await DreamBetterService.remove(id);
 
-      toast.success(
-        "Dream Better berhasil dihapus."
-      );
+      toast.success("Dream Better berhasil dihapus.");
 
       fetchDreamBetters();
     } catch (err) {
       console.error(err);
 
-      toast.error(
-        "Gagal menghapus Dream Better."
-      );
+      toast.error("Gagal menghapus Dream Better.");
     }
   };;
 
