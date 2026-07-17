@@ -4,7 +4,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { companyApi } from "../../services/company";
 
 import useScroll from "../../hooks/useScroll";
-const API_URL = "http://localhost:3000";
+const API_URL = "http://192.168.80.9:3000";
 const menus = [
   { name: "Tentang Kami", path: "/about" },
   { name: "Teknologi", path: "/technology" },

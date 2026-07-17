@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { collectionApi } from "../../services/collection";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://192.168.80.9:3000";
 
 // Mapping response API -> shape yang dipakai UI
 function mapCollection(item) {
