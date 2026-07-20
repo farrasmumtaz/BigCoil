@@ -6,7 +6,9 @@ export default function WarrantyPage() {
   return (
     <>
       <Navbar />
-      <Warranty />
+      <main>
+        <Warranty />
+      </main>
       <Footer />
     </>
   );

@@ -12,6 +12,7 @@ import ExhibitionPage from "./exhibition/page";
 import DreamBetterPage from "./dream-better/page";
 import DreamBetterDetailPage from "./dream-better-detail/page";
 import ServicePage from "./service/page"
+import WarrantyPage from "./warranty/page";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
         <Route path="/dream-better/:slug" element={<DreamBetterDetailPage />}/>
 
         <Route path="/service" element={<ServicePage />}/>
+
+        <Route path="/warranty" element={<WarrantyPage />}/>
       </Routes>
   );
 }

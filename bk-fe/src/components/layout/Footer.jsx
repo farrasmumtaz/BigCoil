@@ -5,7 +5,7 @@ import { SiShopee } from "react-icons/si";
 import SiTokopedia from "../../assets/tokopedia.jpg";
 import { companyApi } from "../../services/company";
 
-const API_URL = "http://192.168.80.9:3000";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Footer() {
   const [company, setCompany] = useState(null);

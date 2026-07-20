@@ -32,12 +32,6 @@ function zoneColor(label) {
   );
 }
 
-/**
- * One full-screen stage (Retail / Hospitality). If it has more than one
- * item, navigation between items is deliberate only — arrow buttons, the
- * dot indicators, or a touch swipe. Normal vertical scrolling is left
- * completely alone so it never fights with the carousel.
- */
 function CarouselStage({ eyebrowLabel, items }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef(null);
