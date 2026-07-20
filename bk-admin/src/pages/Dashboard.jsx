@@ -11,6 +11,8 @@ import {
   MapPinned,
   Mail,
   MessageSquare,
+  Wrench,
+  ShieldCheck,
 } from "lucide-react";
 
 import DashboardService from "../modules/dashboard/dashboard.service";
@@ -57,6 +59,16 @@ const cards = [
     icon: MapPinned,
   },
   {
+    key: "service",
+    title: "Service",
+    icon: Wrench,
+  },
+  {
+    key: "warranty",
+    title: "Warranty",
+    icon: ShieldCheck,
+  },
+  {
     key: "contact",
     title: "Contact",
     icon: Mail,
@@ -98,7 +110,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-6">
         {cards.map((card) => {
           const Icon = card.icon;
 
@@ -117,7 +129,7 @@ export default function Dashboard() {
                   {
                     dashboard.stats[
                       card.key
-                    ]
+                    ] ?? 0
                   }
                 </span>
               </div>
