@@ -26,6 +26,8 @@ import { DreamBetterSectionModule } from './modules/dream-better-section/dream-b
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ServiceCenterModule } from './modules/service-center/service-center.module';
 import { ServiceSettingModule } from './modules/service-setting/service-setting.module';
+import { WarrantyModule } from './modules/warranty/warranty.module';
+import { WarrantyItemModule } from './modules/warranty-item/warranty-item.module';
 @Module({
   imports: [
     PrismaModule,
@@ -53,6 +55,8 @@ import { ServiceSettingModule } from './modules/service-setting/service-setting.
     DashboardModule,
     ServiceCenterModule,
     ServiceSettingModule,
+    WarrantyModule,
+    WarrantyItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

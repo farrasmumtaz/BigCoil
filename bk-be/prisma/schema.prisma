@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,401 +8,282 @@ datasource db {
 }
 
 model Company {
-  id Int @id @default(autoincrement())
-
-  name    String
-  tagline String
-  address String
-
-  logo String
-
-  whatsapp String
-  email    String
-
-  facebook  String?
-  instagram String?
-  tiktok    String?
-
-  shopee    String?
-  tokopedia String?
-
+  id        Int      @id @default(autoincrement())
+  name      String
+  tagline   String
+  logo      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  address   String
+  email     String
+  facebook  String?
+  instagram String?
+  shopee    String?
+  tiktok    String?
+  tokopedia String?
+  whatsapp  String
 
   @@map("company")
 }
 
 model Hero {
-  id Int @id @default(autoincrement())
-
+  id          Int      @id @default(autoincrement())
   title       String
   subtitle    String?
-  description String  @db.Text
-
-  buttonText String
-  buttonLink String
-
-  image String
-
-  updatedAt DateTime @updatedAt
+  description String   @db.Text
+  buttonText  String
+  buttonLink  String
+  image       String
+  updatedAt   DateTime @updatedAt
 
   @@map("hero")
 }
 
 model CollectionCategory {
-  id Int @id @default(autoincrement())
-
-  name String @unique
-  slug String @unique
-
+  id          Int          @id @default(autoincrement())
+  name        String       @unique(map: "CollectionCategory_name_key")
+  slug        String       @unique(map: "CollectionCategory_slug_key")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   collections Collection[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   @@map("collectioncategory")
 }
 
 model Collection {
-  id Int @id @default(autoincrement())
+  id          Int                @id @default(autoincrement())
+  title       String
+  description String             @db.Text
+  createdAt   DateTime           @default(now())
+  slug        String             @unique(map: "Collection_slug_key")
+  updatedAt   DateTime           @updatedAt
+  coverImage  String
+  categoryId  Int
+  category    CollectionCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  detail      CollectionDetail?
+  products    Product[]
 
-  categoryId Int
-
-  title String
-  slug  String @unique
-
-  description String @db.Text
-
-  coverImage String
-
-  category CollectionCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  products Product[]
-
-  detail CollectionDetail?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  @@index([categoryId], map: "collection_categoryId_fkey")
   @@map("collection")
 }
 
 model CollectionDetail {
-  id Int @id @default(autoincrement())
-
-  collectionId Int @unique
-
-  heroImage String
-
-  heroTitle String
-
-  heroDescription String @db.Text
-
-  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int        @id @default(autoincrement())
+  collectionId    Int        @unique(map: "CollectionDetail_collectionId_key")
+  heroImage       String
+  heroTitle       String
+  heroDescription String     @db.Text
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  collection      Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
 
   @@map("collectiondetail")
 }
 
 model Product {
-  id Int @id @default(autoincrement())
-
-  collectionId Int
-
-  title String
-  slug  String @unique
-
-  shortDescription String @db.Text
-
-  heroImage String
-
-  videoUrl String?
-
-  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-
-  galleries ProductGallery[]
-
-  descriptions ProductDescription[]
-
+  id                    Int                    @id @default(autoincrement())
+  collectionId          Int
+  title                 String
+  slug                  String                 @unique(map: "Product_slug_key")
+  shortDescription      String                 @db.Text
+  heroImage             String
+  videoUrl              String?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  collection            Collection             @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  descriptions          ProductDescription[]
+  galleries             ProductGallery[]
   productSpecifications ProductSpecification[]
+  productTechnologies   ProductTechnology[]
 
-  productTechnologies ProductTechnology[]
-
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-
+  @@index([collectionId], map: "product_collectionId_fkey")
   @@map("product")
 }
 
 model ProductGallery {
-  id Int @id @default(autoincrement())
-
+  id        Int      @id @default(autoincrement())
   productId Int
-
-  image String
-
-  sortOrder Int @default(0)
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
+  image     String
+  sortOrder Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
+  @@index([productId], map: "productgallery_productId_fkey")
   @@map("productgallery")
 }
 
 model ProductSpecification {
-  id Int @id @default(autoincrement())
-
+  id        Int      @id @default(autoincrement())
   productId Int
-
-  label String
-
-  value String
-
-  icon String?
-
-  sortOrder Int @default(0)
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
+  label     String
+  value     String
+  icon      String?
+  sortOrder Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
+  @@index([productId], map: "productspecification_productId_fkey")
   @@map("productspecification")
 }
 
 model ProductDescription {
-  id Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
+  productId   Int
+  title       String
+  description String   @db.Text
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
-  productId Int
-
-  title String
-
-  description String @db.Text
-
-  sortOrder Int @default(0)
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  @@index([productId], map: "productdescription_productId_fkey")
   @@map("productdescription")
 }
 
-enum TechnologyType {
-  COIL
-  FOAM
-}
-
 model Technology {
-  id Int @id @default(autoincrement())
-
-  type TechnologyType
-
-  title String
-
-  subtitle String?
-
-  description String @db.Text
-
-  image String
-
-  products ProductTechnology[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int                 @id @default(autoincrement())
+  title       String
+  description String              @db.Text
+  image       String
+  subtitle    String?
+  createdAt   DateTime            @default(now())
+  type        TechnologyType
+  updatedAt   DateTime            @updatedAt
+  products    ProductTechnology[]
 
   @@map("technology")
 }
 
 model ProductTechnology {
-  id Int @id @default(autoincrement())
-
-  productId Int
-
+  id           Int        @id @default(autoincrement())
+  productId    Int
   technologyId Int
+  sortOrder    Int        @default(0)
+  product      Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
 
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  technology Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
-
-  sortOrder Int @default(0)
-
-  @@unique([productId, technologyId])
-
+  @@unique([productId, technologyId], map: "ProductTechnology_productId_technologyId_key")
+  @@index([technologyId], map: "producttechnology_technologyId_fkey")
   @@map("producttechnology")
 }
 
 model DreamBetter {
-  id Int @id @default(autoincrement())
-
-  title String
-
-  slug String @unique
-
-  description String @db.Text
-
-  heroImage String
-
-  sections DreamBetterSection[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int                  @id @default(autoincrement())
+  title       String
+  slug        String               @unique(map: "DreamBetter_slug_key")
+  description String               @db.Text
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  heroImage   String
+  sections    DreamBetterSection[]
 
   @@map("dreambetter")
 }
 
 model DreamBetterSection {
-  id Int @id @default(autoincrement())
-
+  id            Int         @id @default(autoincrement())
   dreamBetterId Int
+  title         String
+  content       String      @db.Text
+  order         Int
+  dreamBetter   DreamBetter @relation(fields: [dreamBetterId], references: [id], onDelete: Cascade)
 
-  title String
-
-  content String @db.Text
-
-  order Int
-
-  dreamBetter DreamBetter@relation(fields: [dreamBetterId], references: [id], onDelete: Cascade)
-
+  @@index([dreamBetterId], map: "dreambettersection_dreamBetterId_fkey")
   @@map("dreambettersection")
 }
 
 model Testimonial {
-  id Int @id @default(autoincrement())
-
-  image String
-
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
+  image     String
   updatedAt DateTime @updatedAt
 
   @@map("testimonial")
 }
 
 model Dealer {
-  id Int @id @default(autoincrement())
-
-  name String
-
-  island String
-
-  province String
-
-  city String
-
-  address String @db.Text
-
-  phone String?
-
-  mapsUrl String?
-
+  id        Int      @id @default(autoincrement())
+  name      String
+  city      String
+  address   String   @db.Text
+  phone     String?
+  mapsUrl   String?
   createdAt DateTime @default(now())
+  island    String
+  province  String
   updatedAt DateTime @updatedAt
 
   @@map("dealer")
 }
 
 model ContactMessage {
-  id Int @id @default(autoincrement())
-
-  name String
-
-  email String
-
-  phone String?
-
-  message String @db.Text
-
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  message   String   @db.Text
   createdAt DateTime @default(now())
 
   @@map("contactmessage")
 }
 
 model Admin {
-  id Int @id @default(autoincrement())
-
-  username String @unique
-
-  password String
-
+  id        Int      @id @default(autoincrement())
+  username  String   @unique(map: "Admin_username_key")
+  password  String
   createdAt DateTime @default(now())
 
   @@map("admin")
 }
 
 model AboutCompany {
-  id Int @id @default(autoincrement())
-
-  title String
-
-  subtitle String
-
-  description String @db.Text
-
-  image String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  title       String
+  subtitle    String
+  description String   @db.Text
+  image       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("aboutcompany")
 }
 
 model AboutBrand {
-  id Int @id @default(autoincrement())
-
-  title String
-
-  description String @db.Text
-
-  image String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  image       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("aboutbrand")
 }
 
 model Exhibition {
-  id Int @id @default(autoincrement())
-
-  title String
-  slug String @unique
-
-  location String
-
-  eventDate DateTime
-
-  description String @db.Text
-
-  coverImage String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique(map: "Exhibition_slug_key")
+  location    String
+  eventDate   DateTime
+  description String   @db.Text
+  coverImage  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("exhibition")
 }
 
 model ServiceCenter {
-  id Int @id @default(autoincrement())
-
-  name String
-
-  island String
-
-  province String
-
-  city String
-
-  address String @db.Text
-
-  phone String?
-
-  mapsUrl String?
-
+  id        Int      @id @default(autoincrement())
+  name      String
+  island    String
+  province  String
+  city      String
+  address   String   @db.Text
+  phone     String?
+  mapsUrl   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -415,11 +291,50 @@ model ServiceCenter {
 }
 
 model ServiceSetting {
-  id Int @id @default(1)
-
-  embedUrl String @db.Text
-
+  id        Int      @id @default(1)
+  embedUrl  String   @db.Text
   updatedAt DateTime @updatedAt
 
   @@map("servicesetting")
+}
+
+enum TechnologyType {
+  COIL
+  FOAM
+}
+
+model Warranty {
+  id          Int      @id @default(autoincrement())
+
+  title       String
+  description String   @db.Text
+  heroImage   String
+
+  items WarrantyItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("warranty")
+}
+
+model WarrantyItem {
+  id Int @id @default(autoincrement())
+
+  warrantyId Int
+
+  title String
+
+  description String? @db.Text
+
+  image String?
+
+  sortOrder Int @default(0)
+
+  warranty Warranty @relation(fields: [warrantyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("warrantyitem")
 }
