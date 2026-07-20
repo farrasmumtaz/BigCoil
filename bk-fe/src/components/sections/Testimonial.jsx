@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { testimonialApi } from "../../services/testimonial";
 
@@ -49,6 +50,9 @@ function Flourish({ className = "" }) {
 
 export default function Testimonial() {
   const [testimonials, setTestimonials] = useState([]);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const trackRef = useRef(null);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -63,11 +67,31 @@ export default function Testimonial() {
     fetchTestimonials();
   }, []);
 
+  const updateScrollState = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    setCanScrollPrev(el.scrollLeft > 4);
+    setCanScrollNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  };
+
+  useEffect(() => {
+    updateScrollState();
+  }, [testimonials]);
+
+  const scrollByPage = (direction) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * el.clientWidth, behavior: "smooth" });
+  };
+
   if (testimonials.length === 0) return null;
 
   return (
     <section className="bg-[#FAF6EE] py-24 lg:py-32">
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap');`}</style>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap');
+        .testimonial-track::-webkit-scrollbar { display: none; }
+      `}</style>
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal className="text-center">
@@ -80,18 +104,53 @@ export default function Testimonial() {
           <Flourish className="mx-auto mt-5" />
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((item, idx) => (
-            <Reveal key={item.id} delay={idx * 90}>
-              <div className="group overflow-hidden border border-[#2A2010]/10">
-                <img
-                  src={`${BASE_URL}${item.image}`}
-                  alt={`testimonial-${item.id}`}
-                  className="aspect-[4/5] w-full object-cover transition duration-1000 ease-out group-hover:scale-[1.05]"
-                />
-              </div>
-            </Reveal>
-          ))}
+        <div className="relative mt-16">
+          <div
+            ref={trackRef}
+            onScroll={updateScrollState}
+            className="testimonial-track flex snap-x snap-mandatory gap-8 overflow-x-auto scroll-smooth pb-2"
+            style={{ scrollbarWidth: "none" }}
+          >
+            {testimonials.map((item, idx) => (
+              <Reveal
+                key={item.id}
+                delay={idx * 90}
+                className="w-full shrink-0 snap-start sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]"
+              >
+                <div className="group overflow-hidden border border-[#2A2010]/10">
+                  <img
+                    src={`${BASE_URL}${item.image}`}
+                    alt={`testimonial-${item.id}`}
+                    className="aspect-[4/5] w-full object-cover transition duration-1000 ease-out group-hover:scale-[1.05]"
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {testimonials.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={() => scrollByPage(-1)}
+                disabled={!canScrollPrev}
+                aria-label="Sebelumnya"
+                className="absolute left-0 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#2A2010]/15 bg-[#FAF6EE] p-2.5 text-[#2A2010] shadow-sm transition hover:border-[#B8935F] hover:text-[#B8935F] disabled:pointer-events-none disabled:opacity-30"
+              >
+                <ChevronLeft size={20} />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => scrollByPage(1)}
+                disabled={!canScrollNext}
+                aria-label="Selanjutnya"
+                className="absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-1/2 rounded-full border border-[#2A2010]/15 bg-[#FAF6EE] p-2.5 text-[#2A2010] shadow-sm transition hover:border-[#B8935F] hover:text-[#B8935F] disabled:pointer-events-none disabled:opacity-30"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </>
+          )}
         </div>
       </div>
     </section>

@@ -31,6 +31,7 @@ import AboutCompanyPage from "./modules/about-company/AboutCompanyPage";
 import ServiceCenterPage from "./modules/service-center/ServiceCenterPage";
 import ServiceSettingPage from "./modules/service-setting/ServiceSettingPage";
 import WarrantyPage from "./modules/warranty/WarrantyPage";
+import WarrantyItemPage from "./modules/warranty-item/WarrantyItemPage"
 
 function App() {
   return (
@@ -111,6 +112,8 @@ function App() {
           <Route path="/service-setting" element={<ServiceSettingPage />}/>
 
           <Route path="/warranty" element={<WarrantyPage />}/>
+
+          <Route path="/warranty-item" element={<WarrantyItemPage />}/>
         </Route>
 
       </Routes>

@@ -58,7 +58,7 @@ export default function HeroForm({
         image: imageUrl,
       });
 
-      toast.error("Hero berhasil diperbarui.");
+      toast.success("Hero berhasil diperbarui.");
 
       onSuccess();
     } catch (err) {

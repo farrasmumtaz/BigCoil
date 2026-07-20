@@ -4,8 +4,7 @@ import { collectionApi } from "../../services/collection";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// Mapping response API -> shape yang dipakai UI
-function mapCollection(item) {
+function mapCollection(item, type) {
   const detail = item.detail || {};
 
   return {
@@ -15,7 +14,7 @@ function mapCollection(item) {
     image: item.coverImage?.startsWith("http")
       ? item.coverImage
       : `${API_URL}${item.coverImage}`,
-    link: `/collection/${item.slug}`,
+    link: `/collection/${type}/${item.slug}`,
     description: item.description,
     features: detail.features || [],
     spec: detail.spec || null,
@@ -181,8 +180,10 @@ export default function Collection() {
           collectionApi.getHospitality(),
         ]);
 
-        setRetailCollections(retailData.map(mapCollection));
-        setHospitalityCollections(hospitalityData.map(mapCollection));
+        setRetailCollections(retailData.map((item) => mapCollection(item, "retail")));
+        setHospitalityCollections(
+          hospitalityData.map((item) => mapCollection(item, "hospitality"))
+        );
       } catch (err) {
         console.error(err);
         setError("Gagal memuat data koleksi.");

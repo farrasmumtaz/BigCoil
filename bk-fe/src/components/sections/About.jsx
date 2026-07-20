@@ -74,6 +74,11 @@ export default function About() {
           </p>
         </div>
 
+        {/* Deskripsi di bawah gambar, center dengan max-width untuk keterbacaan */}
+        <p className="mx-auto max-w-4xl text-center leading-9 text-[#6B5F4A] whitespace-pre-line">
+          {company.description}
+        </p>
+
         {/* Gambar full-width, tidak dikurung grid sejajar */}
         <div className="group relative mx-auto mb-16 max-w-5xl overflow-hidden rounded-2xl shadow-[0_40px_100px_-30px_rgba(42,32,16,0.3)] ring-1 ring-black/5">
           <img
@@ -82,11 +87,6 @@ export default function About() {
             className="block h-auto w-full transition duration-1400 ease-out group-hover:scale-[1.02]"
           />
         </div>
-
-        {/* Deskripsi di bawah gambar, center dengan max-width untuk keterbacaan */}
-        <p className="mx-auto max-w-4xl text-center leading-9 text-[#6B5F4A] whitespace-pre-line">
-          {company.description}
-        </p>
       </div>
 
       {/* Divider antar section */}

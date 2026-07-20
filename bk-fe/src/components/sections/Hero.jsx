@@ -28,8 +28,6 @@ export default function Hero() {
     fetchHero();
   }, []);
 
-  // Trigger the entrance sequence once content is ready (above the fold, so
-  // this fires on mount rather than on scroll like the rest of the page).
   useEffect(() => {
     if (!loading) {
       const frame = requestAnimationFrame(() => setEntered(true));

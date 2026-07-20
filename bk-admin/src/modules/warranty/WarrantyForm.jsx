@@ -82,24 +82,6 @@ export default function WarrantyForm({ warranty, onSuccess }) {
 
       <form onSubmit={submit} className="space-y-6">
         <div>
-          <label className="mb-2 block font-medium">Hero Image</label>
-
-          {(imageFile || form.heroImage) && (
-            <img
-              src={
-                imageFile
-                  ? URL.createObjectURL(imageFile)
-                  : `${API_URL}${form.heroImage}`
-              }
-              alt=""
-              className="mb-4 h-56 w-full rounded-lg border object-cover"
-            />
-          )}
-
-          <input type="file" accept="image/*" onChange={handleImage} />
-        </div>
-
-        <div>
           <label className="mb-2 block font-medium">Title</label>
           <input
             name="title"
@@ -121,6 +103,25 @@ export default function WarrantyForm({ warranty, onSuccess }) {
             // Atribut 'required' TELAH DIHAPUS agar bisa dikosongkan
           />
         </div>
+
+        <div>
+          <label className="mb-2 block font-medium">Hero Image</label>
+
+          {(imageFile || form.heroImage) && (
+            <img
+              src={
+                imageFile
+                  ? URL.createObjectURL(imageFile)
+                  : `${API_URL}${form.heroImage}`
+              }
+              alt=""
+              className="mb-4 h-56 w-full rounded-lg border object-cover"
+            />
+          )}
+
+          <input type="file" accept="image/*" onChange={handleImage} />
+        </div>
+
 
         <button
           disabled={saving}

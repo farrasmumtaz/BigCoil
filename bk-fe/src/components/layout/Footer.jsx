@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa6";
 import { SiShopee } from "react-icons/si";
@@ -56,17 +57,20 @@ export default function Footer() {
               Koleksi
             </h4>
 
+            {/* Absolute paths (leading "/") + react-router Link so this
+                always navigates from site root, regardless of which nested
+                page (e.g. /collection/retail/harmonia) it's clicked from. */}
             <ul className="flex flex-col gap-3 text-sm text-stone-600">
               <li>
-                <a href="collection/retail" className="hover:text-black">
+                <Link to="/collection/retail" className="hover:text-black">
                   Retail
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a href="collection/hospitality" className="hover:text-black">
+                <Link to="/collection/hospitality" className="hover:text-black">
                   Hospitality
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -79,19 +83,27 @@ export default function Footer() {
 
             <ul className="flex flex-col gap-3 text-sm text-stone-600">
               <li>
-                <a href="about">Tentang Kami</a>
+                <Link to="/about" className="hover:text-black">
+                  Tentang Kami
+                </Link>
               </li>
 
               <li>
-                <a href="exhibition">Pameran</a>
+                <Link to="/exhibition" className="hover:text-black">
+                  Pameran
+                </Link>
               </li>
 
               <li>
-                <a href="warranty">Garansi</a>
+                <Link to="/warranty" className="hover:text-black">
+                  Garansi
+                </Link>
               </li>
 
               <li>
-                <a href="service">Pusat Layanan</a>
+                <Link to="/service" className="hover:text-black">
+                  Pusat Layanan
+                </Link>
               </li>
             </ul>
           </div>
