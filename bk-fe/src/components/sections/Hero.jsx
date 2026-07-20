@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { heroApi } from "../../services/hero";
 
-const BASE_URL = "http://192.168.80.9:3000";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function Hero() {
   const [hero, setHero] = useState(null);

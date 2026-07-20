@@ -1,26 +1,74 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service';
 import { CreateWarrantyItemDto } from './dto/create-warranty-item.dto';
 import { UpdateWarrantyItemDto } from './dto/update-warranty-item.dto';
 
 @Injectable()
 export class WarrantyItemService {
-  create(createWarrantyItemDto: CreateWarrantyItemDto) {
-    return 'This action adds a new warrantyItem';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(dto: CreateWarrantyItemDto) {
+    return await this.prisma.warrantyItem.create({
+      data: {
+        warrantyId: dto.warrantyId,
+        title: dto.title,
+        description: dto.description,
+        image: dto.image,
+        sortOrder: dto.sortOrder ?? 0,
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all warrantyItem`;
+  async findAll() {
+    return await this.prisma.warrantyItem.findMany({
+      include: {
+        warranty: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+      orderBy: {
+        sortOrder: 'asc',
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} warrantyItem`;
+  async findOne(id: number) {
+    const item = await this.prisma.warrantyItem.findUnique({
+      where: { id },
+      include: {
+        warranty: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+    });
+
+    if (!item) {
+      throw new NotFoundException('Warranty item not found');
+    }
+
+    return item;
   }
 
-  update(id: number, updateWarrantyItemDto: UpdateWarrantyItemDto) {
-    return `This action updates a #${id} warrantyItem`;
+  async update(id: number, dto: UpdateWarrantyItemDto) {
+    await this.findOne(id);
+
+    return this.prisma.warrantyItem.update({
+      where: { id },
+      data: dto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} warrantyItem`;
+  async remove(id: number) {
+    await this.findOne(id);
+
+    return this.prisma.warrantyItem.delete({
+      where: { id },
+    });
   }
 }

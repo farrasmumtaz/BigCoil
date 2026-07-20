@@ -26,6 +26,10 @@ export const uploadFolders = {
   'about-company': 'about-company',
 
   'about-brand': 'about-brand',
+
+  warranty: 'warranty',
+
+  'warranty-item': 'warranty-item',
 } as const;
 
 export type UploadFolder = keyof typeof uploadFolders;

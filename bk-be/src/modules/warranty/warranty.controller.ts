@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { WarrantyService } from './warranty.service';
 import { CreateWarrantyDto } from './dto/create-warranty.dto';
 import { UpdateWarrantyDto } from './dto/update-warranty.dto';
@@ -8,8 +17,8 @@ export class WarrantyController {
   constructor(private readonly warrantyService: WarrantyService) {}
 
   @Post()
-  create(@Body() createWarrantyDto: CreateWarrantyDto) {
-    return this.warrantyService.create(createWarrantyDto);
+  create(@Body() dto: CreateWarrantyDto) {
+    return this.warrantyService.create(dto);
   }
 
   @Get()
@@ -18,17 +27,20 @@ export class WarrantyController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.warrantyService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.warrantyService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWarrantyDto: UpdateWarrantyDto) {
-    return this.warrantyService.update(+id, updateWarrantyDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateWarrantyDto,
+  ) {
+    return this.warrantyService.update(id, dto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.warrantyService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.warrantyService.remove(id);
   }
 }
