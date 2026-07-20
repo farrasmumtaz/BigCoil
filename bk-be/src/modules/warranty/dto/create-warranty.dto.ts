@@ -1,15 +1,15 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
 export class CreateWarrantyDto {
   @IsString()
-  @IsNotEmpty()
-  title!: string;
+  @IsOptional()
+  title?: string;
 
   @IsString()
   @IsNotEmpty()
-  description!: string;
+  description?: string;
 
   @IsString()
   @IsNotEmpty()
-  heroImage!: string;
+  heroImage?: string;
 }
