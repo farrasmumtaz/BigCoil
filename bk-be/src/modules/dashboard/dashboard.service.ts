@@ -21,6 +21,7 @@ export class DashboardService {
       testimonial,
       recentContacts,
       upcomingExhibitions,
+      article,
     ] = await Promise.all([
       this.prisma.company.count(),
       this.prisma.hero.count(),
@@ -43,6 +44,7 @@ export class DashboardService {
         orderBy: { eventDate: 'asc' },
         take: 5,
       }),
+      this.prisma.article.count(),
     ]);
 
     return {
@@ -59,6 +61,7 @@ export class DashboardService {
         warranty,
         contact,
         testimonial,
+        article,
       },
       recentContacts,
       upcomingExhibitions,

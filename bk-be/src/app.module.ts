@@ -28,6 +28,7 @@ import { ServiceCenterModule } from './modules/service-center/service-center.mod
 import { ServiceSettingModule } from './modules/service-setting/service-setting.module';
 import { WarrantyModule } from './modules/warranty/warranty.module';
 import { WarrantyItemModule } from './modules/warranty-item/warranty-item.module';
+import { ArticleModule } from './modules/article/article.module';
 @Module({
   imports: [
     PrismaModule,
@@ -57,6 +58,7 @@ import { WarrantyItemModule } from './modules/warranty-item/warranty-item.module
     ServiceSettingModule,
     WarrantyModule,
     WarrantyItemModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
