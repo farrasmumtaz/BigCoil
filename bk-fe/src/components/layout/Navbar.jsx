@@ -16,7 +16,7 @@ const menus = [
 
 const collections = [
   { name: "Retail", path: "/collection/retail" },
-  { name: "Hospitality", path: "/collection/hospitality" },
+  { name: "Hospitality", path: "/collection/hospitality/hospitality-collection" },
 ];
 
 export default function Navbar() {
