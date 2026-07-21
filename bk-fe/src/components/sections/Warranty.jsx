@@ -1,11 +1,38 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronRight, ChevronDown, ShieldCheck } from "lucide-react";
+import {
+    ChevronRight,
+    ChevronDown,
+    ShieldCheck,
+    ClipboardCheck,
+    HeartHandshake,
+} from "lucide-react";
 import { warrantyApi } from "../../services/warranty";
 import { warrantyItemApi } from "../../services/warranty-item";
 
 const API_URL = import.meta.env.VITE_API_URL;
+
+// Quick-facts pulled from the warranty card itself (15-year spring
+// warranty, how to register, after-sales support) — fills the space
+// beside the intro copy with content instead of empty air.
+const INTRO_HIGHLIGHTS = [
+    {
+        icon: ShieldCheck,
+        title: "Hingga 15 Tahun",
+        desc: "Masa garansi pegas matras Big Koil, berlaku sejak tanggal pembelian pada faktur.",
+    },
+    {
+        icon: ClipboardCheck,
+        title: "Registrasi Mudah",
+        desc: "Lengkapi formulir pendaftaran dan lampirkan bukti pembelian dari toko/dealer.",
+    },
+    {
+        icon: HeartHandshake,
+        title: "Layanan Purna Jual",
+        desc: "Tim layanan pelanggan siap membantu proses klaim garansi Anda.",
+    },
+];
 
 function Flourish({ className = "" }) {
     return (
@@ -57,14 +84,14 @@ function RichText({ text }) {
                 block.type === "list" ? (
                     <ul key={i} className="space-y-2.5">
                         {block.items.map((item, j) => (
-                            <li key={j} className="flex gap-3 leading-8 text-[#6B5F4A]">
+                            <li key={j} className="flex gap-3 leading-8 text-[#6B5F4A] lg:text-lg">
                                 <span className="mt-3 h-1 w-1 shrink-0 rounded-full bg-[#B8935F]" />
                                 <span>{item}</span>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <p key={i} className="leading-8 text-[#6B5F4A]">
+                    <p key={i} className="leading-8 text-[#6B5F4A] lg:text-lg">
                         {block.text}
                     </p>
                 )
@@ -113,6 +140,7 @@ export default function Warranty() {
 
     return (
         <section className="bg-[#FAF6EE]">
+            <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap');`}</style>
 
             {/* ================= HERO — full screen ================= */}
             <div className="relative h-screen w-full overflow-hidden">
@@ -140,7 +168,7 @@ export default function Warranty() {
 
                     <h1
                         className="text-6xl font-medium text-white md:text-8xl"
-                        style={{ fontFamily: "Cambria, serif" }}
+                        style={{ fontFamily: "'Cormorant Garamond', serif" }}
                     >
                         {warranty.title}
                     </h1>
@@ -161,61 +189,89 @@ export default function Warranty() {
             </div>
 
             {/* ================= INTRO ================= */}
-            <div className="relative mx-auto max-w-3xl px-6 py-28 text-center">
-                <p className="mb-3 text-xs uppercase tracking-[0.4em] text-[#B8935F]">
-                    Selamat Datang
-                </p>
-                <h2
-                    className="mb-8 text-3xl font-medium text-[#2A2010] md:text-4xl"
-                    style={{ fontFamily: "Cambria, serif" }}
-                >
-                    Kenyamanan yang Terjamin
-                </h2>
-                <p className="whitespace-pre-line text-lg leading-9 text-[#6B5F4A]">
-                    {warranty.description}
-                </p>
+            {/* Two columns on large screens: copy on the left (left-aligned,
+                not squeezed into a narrow centered block), quick-fact cards
+                on the right so wide viewports get real content instead of
+                bare margin. Stacks and re-centers on mobile. */}
+            <div className="relative mx-auto max-w-6xl px-6 py-28">
+                <div className="grid gap-16 text-center lg:grid-cols-12 lg:items-center lg:gap-x-16 lg:text-left">
+                    <div className="lg:col-span-7">
+                        <p className="mb-3 text-xs uppercase tracking-[0.4em] text-[#B8935F]">
+                            Selamat Datang
+                        </p>
+                        <h2
+                            className="mb-8 text-3xl font-medium text-[#2A2010] md:text-4xl lg:text-5xl"
+                            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                        >
+                            Kenyamanan yang Terjamin
+                        </h2>
+                        <p className="whitespace-pre-line text-lg leading-9 text-[#6B5F4A]">
+                            {warranty.description}
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-1">
+                        {INTRO_HIGHLIGHTS.map(({ icon: Icon, title, desc }) => (
+                            <div
+                                key={title}
+                                className="flex items-start gap-4 rounded-2xl border border-[#B8935F]/20 bg-white/50 p-6 text-left"
+                            >
+                                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#B8935F]/10 text-[#B8935F]">
+                                    <Icon size={20} strokeWidth={1.5} />
+                                </span>
+                                <div>
+                                    <p className="mb-1 text-sm font-medium uppercase tracking-wide text-[#2A2010]">
+                                        {title}
+                                    </p>
+                                    <p className="text-sm leading-6 text-[#6B5F4A]">{desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
 
             {/* ================= WARRANTY TERMS ================= */}
             {/* Read as one continuous warranty document, not a stack of
                 boxes: each clause is a numbered row separated by a hairline
                 rule, so the eye reads down the page like a contract, not
-                across broken card edges. */}
-            <div className="relative mx-auto max-w-4xl px-6 pb-28">
+                across broken card edges. Container widened so the row
+                actually spans the page on large screens. */}
+            <div className="relative mx-auto max-w-6xl px-6 pb-28">
                 <div>
                     {items.map((item, index) => (
                         <div
                             key={item.id}
                             className="border-b border-[#B8935F]/20 py-14 first:pt-0 last:border-b-0 md:grid md:grid-cols-12 md:gap-x-12 md:py-16"
                         >
-                            {/* left rail — clause number + optional thumbnail */}
-                            <div className="mb-6 flex items-center gap-4 md:col-span-3 md:mb-0 md:block">
+                            {/* left rail — clause number only */}
+                            <div className="mb-6 md:col-span-2 md:mb-0">
                                 <span
                                     className="text-4xl font-medium leading-none text-[#B8935F]/40 md:text-5xl"
-                                    style={{ fontFamily: "Cambria, serif" }}
+                                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
                                 >
                                     {String(index + 1).padStart(2, "0")}
                                 </span>
-
-                                {item.image && (
-                                    <img
-                                        src={`${API_URL}${item.image}`}
-                                        alt={item.title}
-                                        className="h-14 w-14 rounded-full object-cover ring-1 ring-[#B8935F]/20 md:mt-6 md:h-24 md:w-24"
-                                    />
-                                )}
                             </div>
 
                             {/* content */}
-                            <div className="md:col-span-9">
+                            <div className="md:col-span-10">
                                 <h2
-                                    className="mb-5 text-2xl font-medium text-[#2A2010] md:text-3xl"
-                                    style={{ fontFamily: "Cambria, serif" }}
+                                    className="mb-5 text-2xl font-medium text-[#2A2010] md:text-3xl lg:text-4xl"
+                                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
                                 >
                                     {item.title}
                                 </h2>
-
                                 {item.description && <RichText text={item.description} />}
+                                {item.image && (
+                                    <div className="mb-6 overflow-hidden rounded-xl border border-[#B8935F]/25 bg-white shadow-sm">
+                                        <img
+                                            src={`${API_URL}${item.image}`}
+                                            alt={item.title}
+                                            className="max-h-[420px] w-full object-contain"
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))}
@@ -229,7 +285,7 @@ export default function Warranty() {
                 </p>
                 <h3
                     className="mb-10 text-3xl font-medium text-[#2A2010] md:text-4xl"
-                    style={{ fontFamily: "Cambria, serif" }}
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
                 >
                     Daftarkan Garansi Anda
                 </h3>
