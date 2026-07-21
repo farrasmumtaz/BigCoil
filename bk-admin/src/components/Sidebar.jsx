@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 //import emoji
-import { ShieldCheck, PackageCheck, Building2, Image, Boxes, Package, Cpu, Sparkles, CalendarDays, MapPinned, Phone, MessageSquare, LogOut, ChevronDown, ChevronRight, FolderTree, FileImage, Info, Wrench } from "lucide-react";
+import { ShieldCheck, PackageCheck, Building2, Image, Boxes, Package, Cpu, Sparkles, CalendarDays, MapPinned, Phone, MessageSquare, LogOut, ChevronDown, ChevronRight, FolderTree, FileImage, Info, Wrench, Newspaper } from "lucide-react";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -38,6 +38,11 @@ export default function Sidebar() {
           path: "/about-brand",
         },
       ],
+    },
+    {
+      name: "Article",
+      icon: Newspaper,
+      path: "/article",
     },
     {
       name: "Collections",
@@ -178,7 +183,7 @@ export default function Sidebar() {
           path: "/warranty-item",
         },
       ]
-    }
+    },
   ];
 
   const logout = () => {

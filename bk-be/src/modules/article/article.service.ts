@@ -9,7 +9,10 @@ export class ArticleService {
 
   create(dto: CreateArticleDto) {
     return this.prisma.article.create({
-      data: dto,
+      data: {
+        ...dto,
+        publishDate: new Date(dto.publishDate),
+      },
     });
   }
 
@@ -56,14 +59,15 @@ export class ArticleService {
     return article;
   }
 
-  async update(id: number, dto: UpdateArticleDto) {
-    await this.findOne(id);
-
+  update(id: number, dto: UpdateArticleDto) {
     return this.prisma.article.update({
-      where: {
-        id,
+      where: { id },
+      data: {
+        ...dto,
+        ...(dto.publishDate && {
+          publishDate: new Date(dto.publishDate),
+        }),
       },
-      data: dto,
     });
   }
 
