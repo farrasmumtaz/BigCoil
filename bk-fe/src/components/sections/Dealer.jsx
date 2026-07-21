@@ -104,7 +104,7 @@ export default function Dealer() {
             className="text-5xl text-[#2A2010]"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
-            OFFICIAL DEALER
+            DEALER RESMI
           </h1>
 
           <Flourish />

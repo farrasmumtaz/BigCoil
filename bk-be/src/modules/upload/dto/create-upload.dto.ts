@@ -19,6 +19,8 @@ export class CreateUploadDto {
     'collection-detail',
     'exhibition',
     'dream-better-section',
+    'warranty',
+    'article',
   ])
   folder!: string;
 }

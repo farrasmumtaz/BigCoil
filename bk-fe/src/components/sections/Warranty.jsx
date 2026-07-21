@@ -13,9 +13,6 @@ import { warrantyItemApi } from "../../services/warranty-item";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// Quick-facts pulled from the warranty card itself (15-year spring
-// warranty, how to register, after-sales support) — fills the space
-// beside the intro copy with content instead of empty air.
 const INTRO_HIGHLIGHTS = [
     {
         icon: ShieldCheck,
@@ -44,8 +41,6 @@ function Flourish({ className = "" }) {
     );
 }
 
-// Parses "-", "•" or "*" prefixed lines into proper lists so plain-text
-// descriptions read as structured clauses instead of one dense paragraph.
 function parseDescription(text) {
     if (!text) return [];
 
@@ -104,25 +99,32 @@ export default function Warranty() {
     const [warranty, setWarranty] = useState(null);
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const fetchData = async () => {
-        try {
-            const [warrantyData, itemData] = await Promise.all([
-                warrantyApi.get(),
-                warrantyItemApi.getAll(),
-            ]);
-
-            setWarranty(Array.isArray(warrantyData) ? warrantyData[0] : warrantyData);
-            setItems(itemData);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
+        let ignore = false;
+
+        async function fetchData() {
+            try {
+                const [warrantyData, itemData] = await Promise.all([
+                    warrantyApi.get(),
+                    warrantyItemApi.getAll(),
+                ]);
+
+                if (ignore) return;
+
+                setWarranty(Array.isArray(warrantyData) ? warrantyData[0] : warrantyData);
+                setItems(itemData);
+            } catch (err) {
+                if (!ignore) console.error(err);
+            } finally {
+                if (!ignore) setLoading(false);
+            }
+        }
+
         fetchData();
+
+        return () => {
+            ignore = true;
+        };
     }, []);
 
     if (loading) {
@@ -189,10 +191,6 @@ export default function Warranty() {
             </div>
 
             {/* ================= INTRO ================= */}
-            {/* Two columns on large screens: copy on the left (left-aligned,
-                not squeezed into a narrow centered block), quick-fact cards
-                on the right so wide viewports get real content instead of
-                bare margin. Stacks and re-centers on mobile. */}
             <div className="relative mx-auto max-w-6xl px-6 py-28">
                 <div className="grid gap-16 text-center lg:grid-cols-12 lg:items-center lg:gap-x-16 lg:text-left">
                     <div className="lg:col-span-7">
@@ -232,11 +230,6 @@ export default function Warranty() {
             </div>
 
             {/* ================= WARRANTY TERMS ================= */}
-            {/* Read as one continuous warranty document, not a stack of
-                boxes: each clause is a numbered row separated by a hairline
-                rule, so the eye reads down the page like a contract, not
-                across broken card edges. Container widened so the row
-                actually spans the page on large screens. */}
             <div className="relative mx-auto max-w-6xl px-6 pb-28">
                 <div>
                     {items.map((item, index) => (

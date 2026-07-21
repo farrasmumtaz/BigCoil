@@ -102,7 +102,7 @@ export default function Contact() {
               fontFamily: "'Cormorant Garamond', serif",
             }}
           >
-            CONTACT US
+            KONTAK KAMI
           </h1>
 
           <p className="mt-5 text-[#6D5C45]">

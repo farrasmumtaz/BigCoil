@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { dreamBetterApi } from "../../services/dreamBetter";
+import Article from "./Article";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const AUTOPLAY_DELAY = 6000;
@@ -157,6 +158,7 @@ export default function DreamBetterList() {
           </div>
         )}
       </div>
+      <Article />
     </section>
   );
 }

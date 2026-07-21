@@ -30,6 +30,8 @@ export const uploadFolders = {
   warranty: 'warranty',
 
   'warranty-item': 'warranty-item',
+
+  article: 'article',
 } as const;
 
 export type UploadFolder = keyof typeof uploadFolders;
