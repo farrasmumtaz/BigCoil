@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 
 import { CreateExhibitionDto } from './dto/create-exhibition.dto';
@@ -29,23 +29,37 @@ export class ExhibitionService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.exhibition.findUnique({
+  async findOne(id: number) {
+    const exhibition = await this.prisma.exhibition.findUnique({
       where: {
         id,
       },
     });
+
+    if (!exhibition) {
+      throw new NotFoundException('Exhibition tidak ditemukan');
+    }
+
+    return exhibition;
   }
 
-  findBySlug(slug: string) {
-    return this.prisma.exhibition.findUnique({
+  async findBySlug(slug: string) {
+    const exhibition = await this.prisma.exhibition.findUnique({
       where: {
         slug,
       },
     });
+
+    if (!exhibition) {
+      throw new NotFoundException('Exhibition tidak ditemukan');
+    }
+
+    return exhibition;
   }
 
-  update(id: number, dto: UpdateExhibitionDto) {
+  async update(id: number, dto: UpdateExhibitionDto) {
+    await this.findOne(id);
+
     return this.prisma.exhibition.update({
       where: {
         id,
@@ -78,7 +92,9 @@ export class ExhibitionService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.exhibition.delete({
       where: {
         id,

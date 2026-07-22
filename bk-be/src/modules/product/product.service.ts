@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -46,8 +46,8 @@ export class ProductService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.product.findUnique({
+  async findOne(id: number) {
+    const product = await this.prisma.product.findUnique({
       where: {
         id,
       },
@@ -74,10 +74,16 @@ export class ProductService {
         },
       },
     });
+
+    if (!product) {
+      throw new NotFoundException('Product tidak ditemukan');
+    }
+
+    return product;
   }
 
-  findBySlug(slug: string) {
-    return this.prisma.product.findUnique({
+  async findBySlug(slug: string) {
+    const product = await this.prisma.product.findUnique({
       where: {
         slug,
       },
@@ -112,6 +118,12 @@ export class ProductService {
         },
       },
     });
+
+    if (!product) {
+      throw new NotFoundException('Product tidak ditemukan');
+    }
+
+    return product;
   }
 
   findByCollection(collectionId: number) {
@@ -152,7 +164,9 @@ export class ProductService {
     });
   }
 
-  update(id: number, dto: UpdateProductDto) {
+  async update(id: number, dto: UpdateProductDto) {
+    await this.findOne(id);
+
     return this.prisma.product.update({
       where: {
         id,
@@ -180,7 +194,9 @@ export class ProductService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.product.delete({
       where: {
         id,

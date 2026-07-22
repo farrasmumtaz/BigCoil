@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards,
@@ -32,24 +33,27 @@ export class DreamBetterSectionController {
   }
 
   @Get('dream-better/:id')
-  findByDreamBetter(@Param('id') id: string) {
-    return this.service.findByDreamBetter(+id);
+  findByDreamBetter(@Param('id', ParseIntPipe) id: number) {
+    return this.service.findByDreamBetter(id);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.service.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.service.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() dto: UpdateDreamBetterSectionDto) {
-    return this.service.update(+id, dto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateDreamBetterSectionDto,
+  ) {
+    return this.service.update(id, dto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.service.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.service.remove(id);
   }
 }

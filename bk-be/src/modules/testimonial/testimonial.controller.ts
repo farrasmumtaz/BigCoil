@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -30,19 +31,22 @@ export class TestimonialController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.testimonialService.findOne(Number(id));
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.testimonialService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() dto: UpdateTestimonialDto) {
-    return this.testimonialService.update(Number(id), dto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateTestimonialDto,
+  ) {
+    return this.testimonialService.update(id, dto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.testimonialService.remove(Number(id));
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.testimonialService.remove(id);
   }
 }

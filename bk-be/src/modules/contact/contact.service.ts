@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -22,15 +22,23 @@ export class ContactMessageService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.contactMessage.findUnique({
+  async findOne(id: number) {
+    const contactMessage = await this.prisma.contactMessage.findUnique({
       where: {
         id,
       },
     });
+
+    if (!contactMessage) {
+      throw new NotFoundException('Contact Message tidak ditemukan');
+    }
+
+    return contactMessage;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.contactMessage.delete({
       where: {
         id,

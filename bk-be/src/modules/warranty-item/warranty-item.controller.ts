@@ -19,6 +19,7 @@ export class WarrantyItemController {
   constructor(private readonly warrantyItemService: WarrantyItemService) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   create(@Body() dto: CreateWarrantyItemDto) {
     return this.warrantyItemService.create(dto);
   }

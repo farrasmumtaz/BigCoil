@@ -13,6 +13,14 @@ export const uploadFolders = {
 
   'product-specification': 'product-specification',
 
+  'product-description': 'product-description',
+
+  'product-technology': 'product-technology',
+
+  gallery: 'gallery',
+
+  video: 'video',
+
   technology: 'technology',
 
   testimonial: 'testimonial',
@@ -22,6 +30,8 @@ export const uploadFolders = {
   exhibition: 'exhibition',
 
   'dream-better': 'dream-better',
+
+  'dream-better-section': 'dream-better-section',
 
   'about-company': 'about-company',
 

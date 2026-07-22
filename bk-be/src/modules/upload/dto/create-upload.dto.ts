@@ -1,26 +1,10 @@
 import { IsIn, IsString } from 'class-validator';
+import { UploadFolder, uploadFolders } from '../utils/upload-folder';
+
+const allowedUploadFolders = Object.keys(uploadFolders) as UploadFolder[];
 
 export class CreateUploadDto {
   @IsString()
-  @IsIn([
-    'company',
-    'hero',
-    'collection',
-    'technology',
-    'dream-better',
-    'testimonial',
-    'gallery',
-    'video',
-    'product',
-    'product-gallery',
-    'product-specification',
-    'product-description',
-    'product-technology',
-    'collection-detail',
-    'exhibition',
-    'dream-better-section',
-    'warranty',
-    'article',
-  ])
-  folder!: string;
+  @IsIn(allowedUploadFolders)
+  folder!: UploadFolder;
 }

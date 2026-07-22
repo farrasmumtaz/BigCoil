@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
@@ -27,15 +27,23 @@ export class CompanyService {
       },
     });
   }
-  findOne(id: number) {
-    return this.prisma.company.findUnique({
+  async findOne(id: number) {
+    const company = await this.prisma.company.findUnique({
       where: {
         id,
       },
     });
+
+    if (!company) {
+      throw new NotFoundException('Company tidak ditemukan');
+    }
+
+    return company;
   }
 
-  update(id: number, updateCompanyDto: UpdateCompanyDto) {
+  async update(id: number, updateCompanyDto: UpdateCompanyDto) {
+    await this.findOne(id);
+
     return this.prisma.company.update({
       where: {
         id,
@@ -44,7 +52,9 @@ export class CompanyService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.company.delete({
       where: {
         id,

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -37,8 +37,8 @@ export class CollectionService {
       },
     });
   }
-  findBySlug(slug: string) {
-    return this.prisma.collection.findUnique({
+  async findBySlug(slug: string) {
+    const collection = await this.prisma.collection.findUnique({
       where: {
         slug,
       },
@@ -48,6 +48,12 @@ export class CollectionService {
         products: true,
       },
     });
+
+    if (!collection) {
+      throw new NotFoundException('Collection tidak ditemukan');
+    }
+
+    return collection;
   }
   findRetail() {
     return this.prisma.collection.findMany({
@@ -76,8 +82,8 @@ export class CollectionService {
       },
     });
   }
-  findOne(id: number) {
-    return this.prisma.collection.findUnique({
+  async findOne(id: number) {
+    const collection = await this.prisma.collection.findUnique({
       where: {
         id,
       },
@@ -86,9 +92,17 @@ export class CollectionService {
         products: true,
       },
     });
+
+    if (!collection) {
+      throw new NotFoundException('Collection tidak ditemukan');
+    }
+
+    return collection;
   }
 
-  update(id: number, dto: UpdateCollectionDto) {
+  async update(id: number, dto: UpdateCollectionDto) {
+    await this.findOne(id);
+
     return this.prisma.collection.update({
       where: {
         id,
@@ -110,7 +124,9 @@ export class CollectionService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.collection.delete({
       where: {
         id,

@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards,
@@ -47,19 +48,22 @@ export class ServiceCenterController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.serviceCenterService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.serviceCenterService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() dto: UpdateServiceCenterDto) {
-    return this.serviceCenterService.update(+id, dto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateServiceCenterDto,
+  ) {
+    return this.serviceCenterService.update(id, dto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.serviceCenterService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.serviceCenterService.remove(id);
   }
 }

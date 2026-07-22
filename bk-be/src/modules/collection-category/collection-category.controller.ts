@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards,
@@ -34,19 +35,22 @@ export class CollectionCategoryController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.collectionCategoryService.findOne(Number(id));
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.collectionCategoryService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() dto: UpdateCollectionCategoryDto) {
-    return this.collectionCategoryService.update(Number(id), dto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateCollectionCategoryDto,
+  ) {
+    return this.collectionCategoryService.update(id, dto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.collectionCategoryService.remove(Number(id));
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.collectionCategoryService.remove(id);
   }
 }

@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UseGuards,
@@ -46,19 +47,22 @@ export class DealerController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dealerService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.dealerService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateDealerDto: UpdateDealerDto) {
-    return this.dealerService.update(+id, updateDealerDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateDealerDto: UpdateDealerDto,
+  ) {
+    return this.dealerService.update(id, updateDealerDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.dealerService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.dealerService.remove(id);
   }
 }

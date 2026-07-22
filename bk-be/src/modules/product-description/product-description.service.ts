@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -46,8 +46,8 @@ export class ProductDescriptionService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.productDescription.findUnique({
+  async findOne(id: number) {
+    const productDescription = await this.prisma.productDescription.findUnique({
       where: {
         id,
       },
@@ -56,6 +56,12 @@ export class ProductDescriptionService {
         product: true,
       },
     });
+
+    if (!productDescription) {
+      throw new NotFoundException('Product Description tidak ditemukan');
+    }
+
+    return productDescription;
   }
 
   findByProduct(productId: number) {
@@ -70,7 +76,9 @@ export class ProductDescriptionService {
     });
   }
 
-  update(id: number, dto: UpdateProductDescriptionDto) {
+  async update(id: number, dto: UpdateProductDescriptionDto) {
+    await this.findOne(id);
+
     return this.prisma.productDescription.update({
       where: {
         id,
@@ -96,7 +104,9 @@ export class ProductDescriptionService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.productDescription.delete({
       where: {
         id,

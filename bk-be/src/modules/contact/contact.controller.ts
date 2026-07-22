@@ -30,13 +30,13 @@ export class ContactMessageController {
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string) {
-    return this.contactMessageService.findOne(Number(id));
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.contactMessageService.findOne(id);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id', ParseIntPipe) id: string) {
-    return this.contactMessageService.remove(Number(id));
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.contactMessageService.remove(id);
   }
 }

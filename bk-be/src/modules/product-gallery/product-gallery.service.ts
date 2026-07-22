@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -45,8 +45,8 @@ export class ProductGalleryService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.productGallery.findUnique({
+  async findOne(id: number) {
+    const productGallery = await this.prisma.productGallery.findUnique({
       where: {
         id,
       },
@@ -55,6 +55,12 @@ export class ProductGalleryService {
         product: true,
       },
     });
+
+    if (!productGallery) {
+      throw new NotFoundException('Product Gallery tidak ditemukan');
+    }
+
+    return productGallery;
   }
 
   findByProduct(productId: number) {
@@ -73,7 +79,9 @@ export class ProductGalleryService {
     });
   }
 
-  update(id: number, dto: UpdateProductGalleryDto) {
+  async update(id: number, dto: UpdateProductGalleryDto) {
+    await this.findOne(id);
+
     return this.prisma.productGallery.update({
       where: {
         id,
@@ -103,7 +111,9 @@ export class ProductGalleryService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.productGallery.delete({
       where: {
         id,

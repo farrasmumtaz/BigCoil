@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 
 import { CreateHeroDto } from './dto/create-hero.dto';
@@ -22,15 +22,23 @@ export class HeroService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.hero.findUnique({
+  async findOne(id: number) {
+    const hero = await this.prisma.hero.findUnique({
       where: {
         id,
       },
     });
+
+    if (!hero) {
+      throw new NotFoundException('Hero tidak ditemukan');
+    }
+
+    return hero;
   }
 
-  update(id: number, updateHeroDto: UpdateHeroDto) {
+  async update(id: number, updateHeroDto: UpdateHeroDto) {
+    await this.findOne(id);
+
     return this.prisma.hero.update({
       where: {
         id,
@@ -39,7 +47,9 @@ export class HeroService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.hero.delete({
       where: {
         id,

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -47,16 +47,23 @@ export class ProductSpecificationService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.productSpecification.findUnique({
-      where: {
-        id,
-      },
+  async findOne(id: number) {
+    const productSpecification =
+      await this.prisma.productSpecification.findUnique({
+        where: {
+          id,
+        },
 
-      include: {
-        product: true,
-      },
-    });
+        include: {
+          product: true,
+        },
+      });
+
+    if (!productSpecification) {
+      throw new NotFoundException('Product Specification tidak ditemukan');
+    }
+
+    return productSpecification;
   }
 
   findByProduct(productId: number) {
@@ -75,7 +82,9 @@ export class ProductSpecificationService {
     });
   }
 
-  update(id: number, dto: UpdateProductSpecificationDto) {
+  async update(id: number, dto: UpdateProductSpecificationDto) {
+    await this.findOne(id);
+
     return this.prisma.productSpecification.update({
       where: {
         id,
@@ -105,7 +114,9 @@ export class ProductSpecificationService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.productSpecification.delete({
       where: {
         id,

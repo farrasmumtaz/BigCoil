@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateDealerDto } from './dto/create-dealer.dto';
 import { UpdateDealerDto } from './dto/update-dealer.dto';
@@ -21,15 +21,23 @@ export class DealerService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.dealer.findUnique({
+  async findOne(id: number) {
+    const dealer = await this.prisma.dealer.findUnique({
       where: {
         id,
       },
     });
+
+    if (!dealer) {
+      throw new NotFoundException('Dealer tidak ditemukan');
+    }
+
+    return dealer;
   }
 
-  update(id: number, updateDealerDto: UpdateDealerDto) {
+  async update(id: number, updateDealerDto: UpdateDealerDto) {
+    await this.findOne(id);
+
     return this.prisma.dealer.update({
       where: {
         id,
@@ -38,7 +46,9 @@ export class DealerService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.dealer.delete({
       where: {
         id,

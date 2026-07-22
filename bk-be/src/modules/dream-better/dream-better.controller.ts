@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -35,19 +36,22 @@ export class DreamBetterController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dreamBetterService.findOne(Number(id));
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.dreamBetterService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() dto: UpdateDreamBetterDto) {
-    return this.dreamBetterService.update(Number(id), dto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateDreamBetterDto,
+  ) {
+    return this.dreamBetterService.update(id, dto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.dreamBetterService.remove(Number(id));
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.dreamBetterService.remove(id);
   }
 }

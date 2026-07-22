@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -23,15 +23,23 @@ export class TestimonialService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.testimonial.findUnique({
+  async findOne(id: number) {
+    const testimonial = await this.prisma.testimonial.findUnique({
       where: {
         id,
       },
     });
+
+    if (!testimonial) {
+      throw new NotFoundException('Testimonial tidak ditemukan');
+    }
+
+    return testimonial;
   }
 
-  update(id: number, updateTestimonialDto: UpdateTestimonialDto) {
+  async update(id: number, updateTestimonialDto: UpdateTestimonialDto) {
+    await this.findOne(id);
+
     return this.prisma.testimonial.update({
       where: {
         id,
@@ -40,7 +48,9 @@ export class TestimonialService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.testimonial.delete({
       where: {
         id,

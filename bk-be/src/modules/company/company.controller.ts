@@ -5,6 +5,7 @@ import {
   Body,
   Patch,
   Param,
+  ParseIntPipe,
   Delete,
 } from '@nestjs/common';
 import { CompanyService } from './company.service';
@@ -34,20 +35,22 @@ export class CompanyController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.companyService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.companyService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
-    console.log(updateCompanyDto);
-    return this.companyService.update(+id, updateCompanyDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCompanyDto: UpdateCompanyDto,
+  ) {
+    return this.companyService.update(id, updateCompanyDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.companyService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.companyService.remove(id);
   }
 }

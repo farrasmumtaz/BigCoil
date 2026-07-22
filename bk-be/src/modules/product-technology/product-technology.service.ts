@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -50,8 +50,8 @@ export class ProductTechnologyService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.productTechnology.findUnique({
+  async findOne(id: number) {
+    const productTechnology = await this.prisma.productTechnology.findUnique({
       where: {
         id,
       },
@@ -60,9 +60,17 @@ export class ProductTechnologyService {
         technology: true,
       },
     });
+
+    if (!productTechnology) {
+      throw new NotFoundException('Product Technology tidak ditemukan');
+    }
+
+    return productTechnology;
   }
 
-  update(id: number, dto: UpdateProductTechnologyDto) {
+  async update(id: number, dto: UpdateProductTechnologyDto) {
+    await this.findOne(id);
+
     return this.prisma.productTechnology.update({
       where: {
         id,
@@ -75,7 +83,9 @@ export class ProductTechnologyService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.productTechnology.delete({
       where: {
         id,

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -26,8 +26,8 @@ export class CollectionCategoryService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.collectionCategory.findUnique({
+  async findOne(id: number) {
+    const collectionCategory = await this.prisma.collectionCategory.findUnique({
       where: {
         id,
       },
@@ -35,9 +35,17 @@ export class CollectionCategoryService {
         collections: true,
       },
     });
+
+    if (!collectionCategory) {
+      throw new NotFoundException('Collection Category tidak ditemukan');
+    }
+
+    return collectionCategory;
   }
 
-  update(id: number, dto: UpdateCollectionCategoryDto) {
+  async update(id: number, dto: UpdateCollectionCategoryDto) {
+    await this.findOne(id);
+
     return this.prisma.collectionCategory.update({
       where: {
         id,
@@ -46,7 +54,9 @@ export class CollectionCategoryService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.collectionCategory.delete({
       where: {
         id,

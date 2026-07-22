@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -23,16 +23,22 @@ export class DreamBetterService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.dreamBetter.findUnique({
+  async findOne(id: number) {
+    const dreamBetter = await this.prisma.dreamBetter.findUnique({
       where: {
         id,
       },
     });
+
+    if (!dreamBetter) {
+      throw new NotFoundException('Dream Better tidak ditemukan');
+    }
+
+    return dreamBetter;
   }
 
-  findBySlug(slug: string) {
-    return this.prisma.dreamBetter.findUnique({
+  async findBySlug(slug: string) {
+    const dreamBetter = await this.prisma.dreamBetter.findUnique({
       where: {
         slug,
       },
@@ -44,8 +50,17 @@ export class DreamBetterService {
         },
       },
     });
+
+    if (!dreamBetter) {
+      throw new NotFoundException('Dream Better tidak ditemukan');
+    }
+
+    return dreamBetter;
   }
-  update(id: number, updateDreamBetterDto: UpdateDreamBetterDto) {
+
+  async update(id: number, updateDreamBetterDto: UpdateDreamBetterDto) {
+    await this.findOne(id);
+
     return this.prisma.dreamBetter.update({
       where: {
         id,
@@ -54,7 +69,9 @@ export class DreamBetterService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prisma.dreamBetter.delete({
       where: {
         id,
