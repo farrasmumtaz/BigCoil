@@ -5,7 +5,6 @@ import {
   Get,
   Param,
   ParseIntPipe,
-  Patch,
   Post,
 } from '@nestjs/common';
 
@@ -13,7 +12,6 @@ import { ContactMessageService } from './contact.service';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateContactMessageDto } from './dto/create-contact.dto';
-import { UpdateContactMessageDto } from './dto/update-contact.dto';
 
 @Controller('contact')
 export class ContactMessageController {
@@ -34,13 +32,6 @@ export class ContactMessageController {
   @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.contactMessageService.findOne(Number(id));
-  }
-
-  @Patch(':id')
-  // Method di service nanti hanya memperbarui kolom status saja
-  @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() dto: UpdateContactMessageDto) {
-    return this.contactMessageService.update(Number(id), dto);
   }
 
   @Delete(':id')

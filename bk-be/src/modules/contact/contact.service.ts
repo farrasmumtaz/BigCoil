@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 
 import { CreateContactMessageDto } from './dto/create-contact.dto';
-import { UpdateContactMessageDto } from './dto/update-contact.dto';
 
 @Injectable()
 export class ContactMessageService {
@@ -28,15 +27,6 @@ export class ContactMessageService {
       where: {
         id,
       },
-    });
-  }
-
-  update(id: number, updateContactMessageDto: UpdateContactMessageDto) {
-    return this.prisma.contactMessage.update({
-      where: {
-        id,
-      },
-      data: updateContactMessageDto,
     });
   }
 
