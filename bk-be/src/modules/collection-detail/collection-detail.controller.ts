@@ -8,7 +8,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';
 import { CollectionDetailService } from './collection-detail.service';
 
 import { CreateCollectionDetailDto } from './dto/create-collection-detail.dto';
@@ -21,6 +22,7 @@ export class CollectionDetailController {
   ) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   create(@Body() dto: CreateCollectionDetailDto) {
     return this.collectionDetailService.create(dto);
   }
@@ -41,6 +43,7 @@ export class CollectionDetailController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateCollectionDetailDto,
@@ -49,6 +52,7 @@ export class CollectionDetailController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.collectionDetailService.remove(id);
   }

@@ -1,4 +1,6 @@
 import { Body, Controller, Get, Patch } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';
 import { WarrantyService } from './warranty.service';
 import { UpdateWarrantyDto } from './dto/update-warranty.dto';
 
@@ -12,6 +14,7 @@ export class WarrantyController {
   }
 
   @Patch()
+  @UseGuards(JwtAuthGuard)
   update(@Body() dto: UpdateWarrantyDto) {
     return this.warrantyService.update(dto);
   }

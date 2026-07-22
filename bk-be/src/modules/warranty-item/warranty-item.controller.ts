@@ -8,6 +8,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';
 import { WarrantyItemService } from './warranty-item.service';
 import { CreateWarrantyItemDto } from './dto/create-warranty-item.dto';
 import { UpdateWarrantyItemDto } from './dto/update-warranty-item.dto';
@@ -32,6 +34,7 @@ export class WarrantyItemController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateWarrantyItemDto,
@@ -40,6 +43,7 @@ export class WarrantyItemController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.warrantyItemService.remove(id);
   }

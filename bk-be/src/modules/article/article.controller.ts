@@ -8,6 +8,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
@@ -17,6 +19,7 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   create(@Body() dto: CreateArticleDto) {
     return this.articleService.create(dto);
   }
@@ -40,6 +43,7 @@ export class ArticleController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   update(
     @Param('id', ParseIntPipe)
     id: number,
@@ -50,6 +54,7 @@ export class ArticleController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(
     @Param('id', ParseIntPipe)
     id: number,
