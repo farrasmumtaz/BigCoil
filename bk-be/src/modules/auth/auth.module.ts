@@ -15,7 +15,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'bigkoil-secret',
       signOptions: {
-        expiresIn: '1d',
+        expiresIn: '1h',
       },
     }),
   ],
