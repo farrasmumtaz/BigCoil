@@ -3,15 +3,6 @@ import { articleApi } from "../../services/article";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const CATEGORIES = [
-    "Semua",
-    "Sleep Tips",
-    "Lifestyle",
-    "Health",
-    "Promotion",
-    "News",
-];
-
 function Flourish() {
     return (
         <svg width="120" height="16" viewBox="0 0 120 16">
@@ -53,6 +44,24 @@ export default function Article() {
         };
     }, [category]);
 
+    const [categories, setCategories] = useState(["Semua"]);
+    useEffect(() => {
+        async function loadCategories() {
+            try {
+                const data = await articleApi.getCategories();
+
+                setCategories([
+                    "Semua",
+                    ...data.map(item => item.name)
+                ]);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        loadCategories();
+    }, []);
+
     return (
         <section className="bg-[#FAF6EE] py-24">
             <div className="mx-auto max-w-7xl px-6">
@@ -79,7 +88,7 @@ export default function Article() {
 
                 {/* Filter */}
                 <div className="mb-14 flex flex-wrap justify-center gap-3">
-                    {CATEGORIES.map((item) => (
+                    {categories.map((item) => (
                         <button
                             key={item}
                             onClick={() => setCategory(item)}
@@ -115,7 +124,7 @@ export default function Article() {
                                 <img
                                     src={`${API_URL}${article.image}`}
                                     alt={article.title}
-                                    className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                                    className="aspect-4/3 w-full object-cover transition duration-500 group-hover:scale-105"
                                 />
 
                                 <div className="space-y-3 p-6">

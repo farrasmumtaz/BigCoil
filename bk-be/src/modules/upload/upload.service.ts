@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { UploadFolder } from './utils/upload-folder';
 
 interface UploadedFileDto {
   filename: string;
@@ -9,7 +10,7 @@ interface UploadedFileDto {
 
 @Injectable()
 export class UploadService {
-  upload(file: UploadedFileDto, folder: string) {
+  upload(file: UploadedFileDto, folder: UploadFolder) {
     return {
       filename: file.filename,
       originalName: file.originalname,

@@ -45,3 +45,7 @@ export const uploadFolders = {
 } as const;
 
 export type UploadFolder = keyof typeof uploadFolders;
+
+export function isUploadFolder(folder: string): folder is UploadFolder {
+  return folder in uploadFolders;
+}

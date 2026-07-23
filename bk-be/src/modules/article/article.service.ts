@@ -59,6 +59,22 @@ export class ArticleService {
     return article;
   }
 
+  async findCategories() {
+    const categories = await this.prisma.article.findMany({
+      select: {
+        category: true,
+      },
+      distinct: ['category'],
+      orderBy: {
+        category: 'asc',
+      },
+    });
+
+    return categories.map((item) => ({
+      name: item.category,
+    }));
+  }
+
   update(id: number, dto: UpdateArticleDto) {
     return this.prisma.article.update({
       where: { id },

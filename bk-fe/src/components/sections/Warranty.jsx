@@ -26,7 +26,7 @@ const INTRO_HIGHLIGHTS = [
     },
     {
         icon: HeartHandshake,
-        title: "Layanan Purna Jual",
+        title: "Layanan",
         desc: "Tim layanan pelanggan siap membantu proses klaim garansi Anda.",
     },
 ];
@@ -261,7 +261,7 @@ export default function Warranty() {
                                         <img
                                             src={`${API_URL}${item.image}`}
                                             alt={item.title}
-                                            className="max-h-[420px] w-full object-contain"
+                                            className="max-h-105 w-full object-contain"
                                         />
                                     </div>
                                 )}

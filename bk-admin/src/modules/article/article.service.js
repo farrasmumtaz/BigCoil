@@ -5,6 +5,10 @@ const ArticleService = {
     return api.get("/article").then((res) => res.data);
   },
 
+  getCategories() {
+    return api.get("/article/categories").then((res) => res.data);
+  },
+
   getOne(id) {
     return api
       .get(`/article/${id}`)

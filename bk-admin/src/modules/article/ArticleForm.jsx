@@ -63,17 +63,13 @@ export default function ArticleForm({
   const fetchCategories = async () => {
     try {
       const data =
-        await ArticleService.getAll();
+        await ArticleService.getCategories();
 
-      const uniqueCategories = [
-        ...new Set(
-          data
-            .map((item) => item.category)
-            .filter(Boolean)
-        ),
-      ];
-
-      setCategories(uniqueCategories);
+      setCategories(
+        data
+          .map((item) => item.name)
+          .filter(Boolean)
+      );
     } catch (err) {
       console.error(err);
     }

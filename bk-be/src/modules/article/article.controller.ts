@@ -29,6 +29,11 @@ export class ArticleController {
     return this.articleService.findAll();
   }
 
+  @Get('categories')
+  findCategories() {
+    return this.articleService.findCategories();
+  }
+
   @Get('category/:category')
   findByCategory(@Param('category') category: string) {
     return this.articleService.findByCategory(category);

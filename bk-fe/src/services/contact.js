@@ -1,10 +1,9 @@
 import api from "./api";
+import { companyApi } from "./company";
 
 export const contactApi = {
   getCompany() {
-    return api
-      .get("/company/main")
-      .then((res) => res.data);
+    return companyApi.get();
   },
 
   sendMessage(data) {

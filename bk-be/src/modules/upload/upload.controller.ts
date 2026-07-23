@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Controller,
   Param,
   Post,
@@ -12,6 +13,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 import { UploadService } from './upload.service';
 import { storage } from './upload.storage';
+import { isUploadFolder } from './utils/upload-folder';
 
 interface UploadedFileDto {
   filename: string;
@@ -41,6 +43,10 @@ export class UploadController {
     @UploadedFile()
     file: UploadedFileDto,
   ) {
+    if (!isUploadFolder(folder)) {
+      throw new BadRequestException('Invalid upload folder');
+    }
+
     return this.uploadService.upload(file, folder);
   }
 }

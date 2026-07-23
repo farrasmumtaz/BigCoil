@@ -4,7 +4,6 @@ import { WarrantyService } from './warranty.service';
 import { UpdateWarrantyDto } from './dto/update-warranty.dto';
 
 @Controller('warranty')
-@UseGuards(JwtAuthGuard)
 export class WarrantyController {
   constructor(private readonly warrantyService: WarrantyService) {}
 
@@ -12,7 +11,7 @@ export class WarrantyController {
   find() {
     return this.warrantyService.find();
   }
-
+  @UseGuards(JwtAuthGuard)
   @Patch()
   update(@Body() dto: UpdateWarrantyDto) {
     return this.warrantyService.update(dto);
