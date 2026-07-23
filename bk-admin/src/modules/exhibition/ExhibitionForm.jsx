@@ -9,6 +9,7 @@ const initialForm = {
   title: "",
   slug: "",
   location: "",
+  mapsUrl: "",
   eventDate: "",
   description: "",
   coverImage: "",
@@ -34,14 +35,13 @@ export default function ExhibitionForm({
     }
 
     setForm({
-      title: exhibition.title,
-      slug: exhibition.slug,
-      location: exhibition.location,
-      eventDate:
-        exhibition.eventDate?.substring(0, 10) ??
-        "",
-      description: exhibition.description,
-      coverImage: exhibition.coverImage,
+      title: exhibition.title ?? "",
+      slug: exhibition.slug ?? "",
+      location: exhibition.location ?? "",
+      mapsUrl: exhibition.mapsUrl ?? "",
+      eventDate: exhibition.eventDate?.substring(0, 10) ?? "",
+      description: exhibition.description ?? "",
+      coverImage: exhibition.coverImage ?? "",
     });
 
     setImageFile(null);
@@ -157,6 +157,23 @@ export default function ExhibitionForm({
             className="mt-2 w-full rounded-lg border p-3"
             required
           />
+        </div>
+
+        <div>
+          <label>Google Maps URL</label>
+
+          <input
+            type="url"
+            name="mapsUrl"
+            value={form.mapsUrl}
+            onChange={handleChange}
+            placeholder="https://maps.google.com/..."
+            className="mt-2 w-full rounded-lg border p-3"
+          />
+
+          <p className="mt-2 text-sm text-gray-500">
+            Link ini digunakan untuk tombol Maps dan QR code lokasi pameran.
+          </p>
         </div>
 
         <div>

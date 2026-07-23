@@ -142,7 +142,6 @@ export default function Warranty() {
 
     return (
         <section className="bg-[#FAF6EE]">
-            <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap');`}</style>
 
             {/* ================= HERO — full screen ================= */}
             <div className="relative h-screen w-full overflow-hidden">
@@ -153,7 +152,7 @@ export default function Warranty() {
                 />
 
                 {/* layered gradient so both top nav and bottom copy stay legible */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-black/60" />
+                <div className="absolute inset-0 bg-linear-to-b from-black/55 via-black/25 to-black/60" />
                 <div
                     className="pointer-events-none absolute inset-0 opacity-[0.15]"
                     style={{

@@ -31,6 +31,10 @@ export default function ExhibitionTable({
             </th>
 
             <th className="p-4 text-left">
+              Maps
+            </th>
+
+            <th className="p-4 text-left">
               Event Date
             </th>
 
@@ -48,7 +52,7 @@ export default function ExhibitionTable({
           {data.length === 0 && (
             <tr>
               <td
-                colSpan={7}
+                colSpan={8}
                 className="p-10 text-center text-gray-500"
               >
                 Belum ada Exhibition.
@@ -79,6 +83,21 @@ export default function ExhibitionTable({
 
               <td className="p-4">
                 {item.location}
+              </td>
+
+              <td className="p-4">
+                {item.mapsUrl ? (
+                  <a
+                    href={item.mapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium text-blue-600 hover:underline"
+                  >
+                    Buka Maps
+                  </a>
+                ) : (
+                  <span className="text-gray-400">-</span>
+                )}
               </td>
 
               <td className="p-4 whitespace-nowrap">

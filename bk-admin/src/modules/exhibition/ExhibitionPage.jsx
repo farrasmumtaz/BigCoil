@@ -50,14 +50,14 @@ export default function ExhibitionPage() {
     try {
       await ExhibitionService.remove(id);
       toast.success(
-        "Dealer berhasil dihapus."
+        "Exhibition berhasil dihapus."
       );
 
       fetchExhibitions();
     } catch (err) {
       console.error(err);
       toast.error(
-        "Gagal menghapus Dealer."
+        "Gagal menghapus Exhibition."
       );
     }
   };

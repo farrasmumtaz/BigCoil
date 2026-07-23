@@ -9,13 +9,14 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = Number(process.env.PORT ?? 3000);
-  const corsOrigins = process.env.CORS_ORIGINS
-    ?.split(',')
-    .map(origin => origin.trim())
+  const corsOrigins = process.env.CORS_ORIGINS?.split(',')
+    .map((origin) => origin.trim())
     .filter(Boolean);
 
   if (process.env.NODE_ENV === 'production' && !corsOrigins?.length) {
-    throw new Error('CORS_ORIGINS environment variable is required in production');
+    throw new Error(
+      'CORS_ORIGINS environment variable is required in production',
+    );
   }
 
   app.useGlobalPipes(

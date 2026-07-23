@@ -14,6 +14,7 @@ export class ExhibitionService {
         title: dto.title,
         slug: dto.slug,
         location: dto.location,
+        mapsUrl: dto.mapsUrl || null,
         eventDate: new Date(dto.eventDate),
         description: dto.description,
         coverImage: dto.coverImage,
@@ -75,6 +76,10 @@ export class ExhibitionService {
 
         ...(dto.location && {
           location: dto.location,
+        }),
+
+        ...(dto.mapsUrl !== undefined && {
+          mapsUrl: dto.mapsUrl || null,
         }),
 
         ...(dto.eventDate && {

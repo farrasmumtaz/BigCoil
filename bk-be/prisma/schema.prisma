@@ -266,6 +266,7 @@ model Exhibition {
   title       String
   slug        String   @unique(map: "Exhibition_slug_key")
   location    String
+  mapsUrl     String?  @db.Text
   eventDate   DateTime
   description String   @db.Text
   coverImage  String
